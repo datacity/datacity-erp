@@ -15,7 +15,8 @@ enyo.kind({
 					{kind: "MapPanel", name: "map"},
 					{kind: "CategoriesPanel", name: "categories"},
 					{kind: "FavoritesPanel", name: "favorites"},
-					{kind: "SearchPanel", name: "search"}
+					{kind: "SearchPanel", name: "search"},
+					{kind: "AboutPanel", name: "about"}
 				]}
 			]}
     	]}

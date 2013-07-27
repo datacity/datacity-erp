@@ -5,8 +5,9 @@ enyo.kind({
 		{kind: "FittableRows", classes: "enyo-fit", components: [
 			{content: "Logo", classes: "menu-header"},
 			{kind: "Repeater", name: "list", onSetupItem: "setupItem", components: [
-				{name: "item", ontap: "listTapped", components: [
-					{name: "name"}
+				{name: "item", classes: "menu-list-item enyo-border-box", ontap: "listTapped", components: [
+				    {name: "thumbnail", kind: "Image", classes: "menu-list-item-image"},
+					{name: "name", classes: "menu-list-item-title"}
 				]}
 			]}
 		]}
@@ -21,6 +22,7 @@ enyo.kind({
 		var item = inEvent.item;
 
 		item.$.name.setContent(this.list[index].name);
+		item.$.thumbnail.setSrc(this.list[index].thumbnail);
 	},
 	listTapped: function(inSender, inEvent) {
 		var item = this.list[inEvent.index];
@@ -30,9 +32,10 @@ enyo.kind({
 		enyo.$.app.$.title.setContent(item.name);
 	},
 	list: [
-		{name: "Carte", index: 0},
-		{name: "Categories", index: 1},
-		{name: "Favoris", index: 2}
+		{name: "Carte", index: 0, thumbnail:"assets/favicon.ico"},
+		{name: "Categories", index: 1, thumbnail:"assets/favicon.ico"},
+		{name: "Favoris", index: 2, thumbnail:"assets/favicon.ico"},
+		{name: "À propos", index: 4, thumbnail:"assets/favicon.ico"}
 	]
 });
 
