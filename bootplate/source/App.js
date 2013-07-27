@@ -8,12 +8,14 @@ enyo.kind({
 			{kind: "FittableRows", style: "min-width: 320px;", components: [
 				{kind: "onyx.Toolbar", components: [
 					{kind: "onyx.Button", content:"Menu", ontap: "gotoMenu"},
-					{content: "Toolbar"}
+					{name: "title", content: "Carte"},
+					{kind: "onyx.Button", content: "S", ontap: "gotoSearch"}
 				]},
 				{kind: "Panels", name: "contentPanels", arrangerKind: "CardArranger", fit: true, draggable: false, components: [
 					{kind: "MapPanel", name: "map"},
 					{kind: "CategoriesPanel", name: "categories"},
-					{kind: "FavoritesPanel", name: "favorites"}
+					{kind: "FavoritesPanel", name: "favorites"},
+					{kind: "SearchPanel", name: "search"}
 				]}
 			]}
     	]}
@@ -24,5 +26,9 @@ enyo.kind({
 	},
 	gotoMenu: function(inSender, inEvent) {
 		this.$.mainPanels.setIndex(this.$.mainPanels.index == 1 ? 0 : 1);
+	},
+	gotoSearch: function(inSender, inEvent) {
+		this.$.mainPanels.setIndex(1);
+		this.$.contentPanels.setIndex(3);
 	}
 });
