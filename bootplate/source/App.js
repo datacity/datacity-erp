@@ -11,9 +11,9 @@ enyo.kind({
 					{content: "Toolbar"}
 				]},
 				{kind: "Panels", name: "contentPanels", arrangerKind: "CardArranger", fit: true, draggable: false, components: [
+					{kind: "MapPanel", name: "map"},
 					{kind: "CategoriesPanel", name: "categories"},
-					{kind: "FavoritesPanel", name: "favorites"},
-					{kind: "MapPanel", name: "map"}
+					{kind: "FavoritesPanel", name: "favorites"}
 				]}
 			]}
     	]}

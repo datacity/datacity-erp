@@ -29,9 +29,9 @@ enyo.kind({
 		enyo.$.app.$.mainPanels.setIndex(1);
 	},
 	list: [
-		{name: "Categories", index: 0},
-		{name: "Favoris", index: 1},
-		{name: "Carte", index: 2}
+		{name: "Carte", index: 0},
+		{name: "Categories", index: 1},
+		{name: "Favoris", index: 2}
 	]
 });
 
