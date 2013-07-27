@@ -1,5 +1,5 @@
 
-/* /home/reviewdaemon/hudson/trunk/agent/workspace/Enyo-github-build/bootplate/enyo/../lib/layout/fittable/source/FittableLayout.css */
+/* C://Users/Cyril/Documents/Epitech/webapp-bat-publics/bootplate/enyo/../lib/layout/fittable/source/FittableLayout.css */
 
 .enyo-fittable-rows-layout {
 	position: relative;
@@ -71,7 +71,7 @@
 	margin-bottom: 0 !important;
 }
 
-/* /home/reviewdaemon/hudson/trunk/agent/workspace/Enyo-github-build/bootplate/enyo/../lib/layout/list/source/List.css */
+/* C://Users/Cyril/Documents/Epitech/webapp-bat-publics/bootplate/enyo/../lib/layout/list/source/List.css */
 
 .enyo-list {
 	position: relative;
@@ -123,7 +123,7 @@
 	transition: top 0.1s linear, left 0.1s linear;
 }
 
-/* /home/reviewdaemon/hudson/trunk/agent/workspace/Enyo-github-build/bootplate/enyo/../lib/layout/list/source/PulldownList.css */
+/* C://Users/Cyril/Documents/Epitech/webapp-bat-publics/bootplate/enyo/../lib/layout/list/source/PulldownList.css */
 
 .enyo-list-pulldown {
 	position: absolute;
@@ -186,7 +186,7 @@
 	-ms-transform: rotate(180deg);
 }
 
-/* /home/reviewdaemon/hudson/trunk/agent/workspace/Enyo-github-build/bootplate/enyo/../lib/layout/panels/source/arrangers/Arranger.css */
+/* C://Users/Cyril/Documents/Epitech/webapp-bat-publics/bootplate/enyo/../lib/layout/panels/source/arrangers/Arranger.css */
 
 .enyo-arranger {
 	position: relative;
@@ -215,7 +215,7 @@
 }
 
 
-/* /home/reviewdaemon/hudson/trunk/agent/workspace/Enyo-github-build/bootplate/enyo/../lib/layout/panels/source/Panels.css */
+/* C://Users/Cyril/Documents/Epitech/webapp-bat-publics/bootplate/enyo/../lib/layout/panels/source/Panels.css */
 
 .enyo-panels {
 }
@@ -230,7 +230,7 @@
 	}
 }
 
-/* /home/reviewdaemon/hudson/trunk/agent/workspace/Enyo-github-build/bootplate/enyo/../lib/layout/tree/source/Node.css */
+/* C://Users/Cyril/Documents/Epitech/webapp-bat-publics/bootplate/enyo/../lib/layout/tree/source/Node.css */
 
 .enyo-node {
 	cursor: default;
@@ -264,7 +264,7 @@
 }
 
 
-/* /home/reviewdaemon/hudson/trunk/agent/workspace/Enyo-github-build/bootplate/enyo/../lib/layout/imageview/source/ImageViewPin.css */
+/* C://Users/Cyril/Documents/Epitech/webapp-bat-publics/bootplate/enyo/../lib/layout/imageview/source/ImageViewPin.css */
 
 
 .pinDebug {
@@ -272,7 +272,7 @@
 	border:1px solid yellow;
 }
 
-/* /home/reviewdaemon/hudson/trunk/agent/workspace/Enyo-github-build/bootplate/enyo/../lib/onyx/css/onyx.less */
+/* C://Users/Cyril/Documents/Epitech/webapp-bat-publics/bootplate/enyo/../lib/onyx/css/onyx.less */
 
 /* Onyx default parameters defined here */
 /* Fonts */
@@ -1427,6 +1427,35 @@
 	Put anything you reference with "url(../source)" in ../assets/
 	This way, you can minify your application, and just remove the "source" folder for production
 */
-.nice-padding {
-	padding: 15px;
+
+/*
+#app {
+	margin: 10px;
+	width: 320px;
+	height: 480px;
+}
+*/
+
+.panels > * {
+	width: 320px;
+	box-shadow: -4px 0px 8px rgba(0,0,0,0.35);
+	-moz-box-shadow: -4px 0px 8px rgba(0,0,0,0.35);
+	-o-box-shadow: -4px 0px 8px rgba(0,0,0,0.35);
+	-webkit-box-shadow: -4px 0px 12px rgba(0,0,0,0.4);
+	background-color: #ccc;
+}
+
+@-ms-viewport {
+    width: device-width;
+    height: device-height;
+    user-zoom: fixed;
+}
+
+
+/* source/Menu.css */
+
+.menu-panel {
+	background-color: #333;
+	color: #eee;
+	width: 250px;
 }

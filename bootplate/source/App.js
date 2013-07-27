@@ -3,15 +3,26 @@ enyo.kind({
 	kind: "FittableRows",
 	fit: true,
 	components:[
-		{kind: "onyx.Toolbar", content: "Hello World"},
-		{kind: "enyo.Scroller", fit: true, components: [
-			{name: "main", classes: "nice-padding", allowHtml: true}
-		]},
-		{kind: "onyx.Toolbar", components: [
-			{kind: "onyx.Button", content: "Tap me", ontap: "helloWorldTap"}
-		]}
+		{kind: "Panels", name: "mainPanels", classes: "panels enyo-fit", index: 1, narrowFit: false, realtimeFit: false, arrangerKind: "CollapsingArranger", components: [
+			{kind: "MenuPanel", name: "menu"},
+			{kind: "FittableRows", style: "min-width: 320px;", components: [
+				{kind: "onyx.Toolbar", components: [
+					{kind: "onyx.Button", content:"Menu", ontap: "gotoMenu"},
+					{content: "Toolbar"}
+				]},
+				{kind: "Panels", name: "contentPanels", arrangerKind: "CardArranger", fit: true, draggable: false, components: [
+					{kind: "CategoriesPanel", name: "categories"},
+					{kind: "FavoritesPanel", name: "favorites"},
+					{kind: "MapPanel", name: "map"}
+				]}
+			]}
+    	]}
 	],
-	helloWorldTap: function(inSender, inEvent) {
-		this.$.main.addContent("The button was tapped.<br/>");
+	create: function() {
+		this.inherited(arguments);
+
+	},
+	gotoMenu: function(inSender, inEvent) {
+		this.$.mainPanels.setIndex(this.$.mainPanels.index == 1 ? 0 : 1);
 	}
 });

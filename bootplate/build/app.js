@@ -1,7 +1,7 @@
 
 // minifier: path aliases
 
-enyo.path.addPaths({layout: "/home/reviewdaemon/hudson/trunk/agent/workspace/Enyo-github-build/bootplate/enyo/../lib/layout/", onyx: "/home/reviewdaemon/hudson/trunk/agent/workspace/Enyo-github-build/bootplate/enyo/../lib/onyx/", onyx: "/home/reviewdaemon/hudson/trunk/agent/workspace/Enyo-github-build/bootplate/enyo/../lib/onyx/source/"});
+enyo.path.addPaths({layout: "C://Users/Cyril/Documents/Epitech/webapp-bat-publics/bootplate/enyo/../lib/layout/", onyx: "C://Users/Cyril/Documents/Epitech/webapp-bat-publics/bootplate/enyo/../lib/onyx/", onyx: "C://Users/Cyril/Documents/Epitech/webapp-bat-publics/bootplate/enyo/../lib/onyx/source/"});
 
 // FittableLayout.js
 
@@ -4423,25 +4423,59 @@ name: "App",
 kind: "FittableRows",
 fit: !0,
 components: [ {
-kind: "onyx.Toolbar",
-content: "Hello World"
-}, {
-kind: "enyo.Scroller",
-fit: !0,
+kind: "Panels",
+name: "mainPanels",
+classes: "panels enyo-fit",
+index: 1,
+narrowFit: !1,
+realtimeFit: !1,
+arrangerKind: "CollapsingArranger",
 components: [ {
-name: "main",
-classes: "nice-padding",
-allowHtml: !0
-} ]
+kind: "MenuPanel",
+name: "menu"
 }, {
+kind: "FittableRows",
+style: "min-width: 320px;",
+components: [ {
 kind: "onyx.Toolbar",
 components: [ {
 kind: "onyx.Button",
-content: "Tap me",
-ontap: "helloWorldTap"
+content: "Menu",
+ontap: "gotoMenu"
+}, {
+content: "Toolbar"
+} ]
+}, {
+content: "coucou",
+fit: !0
+} ]
 } ]
 } ],
-helloWorldTap: function(e, t) {
-this.$.main.addContent("The button was tapped.<br/>");
+create: function() {
+this.inherited(arguments);
+},
+rendered: function() {
+this.inherited(arguments);
+},
+gotoMenu: function(e, t) {
+var n = this.$.mainPanels.index == 1 ? 0 : 1;
+this.$.mainPanels.setIndex(n);
+}
+});
+
+// Menu.js
+
+enyo.kind({
+name: "MenuPanel",
+classes: "onyx enyo-unselectable menu-panel",
+components: [ {
+kind: "FittableRows",
+classes: "enyo-fit",
+components: [ {
+content: "Menu"
+} ]
+} ],
+create: function() {
+this.inherited(arguments);
 }
 });

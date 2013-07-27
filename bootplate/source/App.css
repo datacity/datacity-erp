@@ -2,6 +2,35 @@
 	Put anything you reference with "url()" in ../assets/
 	This way, you can minify your application, and just remove the "source" folder for production
 */
-.nice-padding {
-	padding: 15px;
+
+
+body {
+	background-color: #c3c3c3;
 }
+
+#app {
+	margin: 10px auto;
+	width: 320px;
+	height: 480px;
+	border: 1px solid black;
+}
+
+
+.panels > * {
+	width: 320px;
+	box-shadow: -4px 0px 8px rgba(0,0,0,0.35);
+	-moz-box-shadow: -4px 0px 8px rgba(0,0,0,0.35);
+	-o-box-shadow: -4px 0px 8px rgba(0,0,0,0.35);
+	-webkit-box-shadow: -4px 0px 12px rgba(0,0,0,0.4);
+	background-color: #ccc;
+}
+
+/*
+@-ms-viewport {
+    width: device-width;
+    height: device-height;
+    user-zoom: fixed;
+    max-zoom: 1;
+    min-zoom: 1;
+}
+*/
