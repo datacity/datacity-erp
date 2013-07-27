@@ -27,6 +27,7 @@ enyo.kind({
 
 		enyo.$.app.$.contentPanels.setIndex(item.index);
 		enyo.$.app.$.mainPanels.setIndex(1);
+		enyo.$.app.$.title.setContent(item.name);
 	},
 	list: [
 		{name: "Carte", index: 0},
