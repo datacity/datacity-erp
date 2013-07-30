@@ -4,10 +4,12 @@ enyo.kind({
 	components: [
 		{kind: "FittableRows", classes: "enyo-fit", components: [
 			{content: "Logo", classes: "menu-header"},
-			{kind: "Repeater", name: "list", onSetupItem: "setupItem", components: [
-				{name: "item", classes: "menu-list-item enyo-border-box", ontap: "listTapped", components: [
-				    {name: "thumbnail", kind: "Image", classes: "menu-list-item-thumbnail"},
-					{name: "name", classes: "menu-list-item-title"}
+			{kind: "Scroller", fit: true, components: [
+				{kind: "Repeater", name: "list", onSetupItem: "setupItem", components: [
+					{name: "item", classes: "menu-list-item enyo-border-box", ontap: "listTapped", components: [
+					    {name: "thumbnail", kind: "Image", classes: "menu-list-item-thumbnail"},
+						{name: "name", classes: "menu-list-item-title"}
+					]}
 				]}
 			]}
 		]}
