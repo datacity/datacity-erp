@@ -5,50 +5,58 @@ enyo.kind({
 	components: [
 		{kind: "Panels", name: "categoriesPanels", fit: true, classes: "panels-lists", arrangerKind: "CollapsingArranger", wrap: false, components: [
 			{name: "left", components: [
-				{kind: "List", name: "categoriesList", classes: "enyo-fit", touch: true, count: 1, onSetupItem: "setupCategories", item: "panelcategoriescontent", components: [
+				{kind: "List", name: "categoriesList", classes: "enyo-fit", onSetupItem: "setupCategories", components: [
 					{name: "panelcategoriescontent", ontap: "categoriesListTapped", classes: "panel-list-item"}
 				]}
 			]},
 			{name: "middle", components: [
-				{kind: "List", name: "citiesList", classes: "enyo-fit", touch: true, count: 1, item: "panelcitiescontent", components: [
+				{kind: "List", name: "citiesList", classes: "enyo-fit", onSetupItem: "setupCities", components: [
 					{name: "panelcitiescontent", ontap: "citiesListTapped", classes: "panel-list-item"}
-				]}
-			]},
-			{name: "body", fit: true, components: [
-				{kind: "Scroller", classes: "enyo-fit", touch: true, components: [
-					{classes: "panel-item-content",  name: "contentList", content: ""}
 				]}
 			]}
 		]}
 	],
 	create: function() {
 		this.inherited(arguments);
+
+		this.$.categoriesList.setCount(this.categories.length);
 	},
 	setupCategories: function(inSender, inEvent) {
-		this.$.panelcategoriescontent.addRemoveClass("onyx-selected", inSender.isSelected(inEvent.index));
-		this.$.categoriesList.setCount(15);
-		this.$.panelcategoriescontent.setContent("This is category number: " + inEvent.index);
+		var item = this.categories[inEvent.index];
+		this.$.panelcategoriescontent.setContent(item);
 	},
-//	setupCities: function(idPanel) {
-//		//this.$.panelcitiescontent.addRemoveClass("onyx-selected", inSender.isSelected(inEvent.index));
-//		this.$.panelcitiescontent.setContent("This is city number: " + idPanel);
-//	},
 	categoriesListTapped: function(inSender, inEvent) {
-		
-		var data = ['Ville 1', 'Ville 2','Ville 3', 'Ville 4', 'Ville 5','Ville 6', 'Ville 7', 'Ville 8','Ville 9'];
-		
-		this.$.citiesList.setCount(data.length);
-		
-//        for (var i in data){
-//        	this.$.citiesList.createComponent({index:i, /*style:'background-color:#AAA;',*/ content:'list '+data[i]});
-//        }
-        //this.$.listplaceholder.render(); 
-		this.$.panelcitiescontent.setContent(data[inEvent.index]);
-        this.$.citiesList.render(); 
+		var i = inEvent.index;
+		this.filtered = [];
+
+		for (var numCity in this.cities) {
+			var city = this.cities[numCity];
+			for (var category in city.categories) {
+				if (city.categories[category] == i)
+					this.filtered.push(city);
+			}
+		}
+
+		this.$.citiesList.setCount(this.filtered.length);
 		this.$.categoriesPanels.next();
 	},
 	citiesListTapped: function(inSender, inEvent) {
-		this.$.contentList.setContent("Dynamical content - description");
-		this.$.categoriesPanels.next();
-	}
+		var i = inEvent.index;
+		var item = this.filtered[i];
+
+		console.log("Ville cliquée = " + item.name);
+	},
+	setupCities: function(inSender, inEvent) {
+		var i = inEvent.index;
+		var item = this.filtered[i];
+
+		this.$.panelcitiescontent.setContent(item.name);
+	},
+	cities: [
+		{name: "Ville1", categories: [1, 2]},
+		{name: "Ville2", categories: [0, 2]},
+		{name: "Ville3", categories: [0, 1, 2]}
+	],
+	categories: ['Categorie 1', 'Categorie 2','Categorie 3', 'Categorie 4', 'Categorie 5','Categorie 6', 'Categorie 7', 'Categorie 8','Categorie 9']
+
 });

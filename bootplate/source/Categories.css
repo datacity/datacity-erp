@@ -1,5 +1,5 @@
 .panels-lists > * {
-	width: 320px;
+	width: 320%;
 	background-color: #EAEAEA;
 	-moz-box-shadow: -4px 0 4px rgba(0,0,0,0.3);
 	-webkit-box-shadow: -4px 0 4px rgba(0,0,0,0.3);
