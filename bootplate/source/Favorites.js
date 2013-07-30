@@ -1,12 +1,14 @@
 enyo.kind({
 	name: "FavoritesPanel",
-	classes: "enyo-fit",
+	classes: "onyx",
 	components: [
 		{kind: "FittableRows", classes: "enyo-fit", components: [
 			{kind: "List", name: "favoritesList", fit: true, onSetupItem: "setupFavorites", components: [
 				{classes: "favorites-list-item", ontap: "buildingTapped", components: [
-					{name: "building", classes: "favorites-list-item-content", fit: true},
-					{kind: "onyx.Button", classes: "favorites-list-item-button", content: "-", ontap: "deleteItem"}
+					{name: "building", classes: "favorites-list-item-content"},
+					{classes: "favorites-list-item-group-button", components: [
+						{kind: "onyx.Button", content: "-", ontap: "deleteItem"}
+					]}
 				]}
 			]}
 		]}

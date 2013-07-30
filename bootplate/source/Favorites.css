@@ -1,14 +1,14 @@
 .favorites-list-item {
 	padding: 10px;
 	border-bottom: 1px solid black;
-	height: 34px;
+	height: 32px;
 }
 
 .favorites-list-item-content {
 	float: left;
-	line-height: 34px;
+	line-height: 32px;
 }
 
-.favorites-list-item-button {
-	float: right;
+.favorites-list-item-group-button {
+	text-align: right;
 }
