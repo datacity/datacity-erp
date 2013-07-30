@@ -11,6 +11,7 @@ enyo.depends(
 	"Categories.js",
 	"Categories.css",
 	"Favorites.js",
+	"Favorites.css",
 	"Map.js",
 	"Search.js"
 );
