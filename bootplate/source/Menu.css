@@ -11,21 +11,17 @@
 }
 
 .menu-list-item {
-	position: relative;
 	border-bottom: 1px solid #0E0E0E;
-	padding: 12px 16px;
-	background-color: #333333;
+	padding: 10px;
 }
 
-/*.menu-list-item-thumbnail {
-	float:left;
-	width: 75px;
-	height: 75px;
-}*/
+.menu-list-item-thumbnail {
+	width: 25px;
+	height: 25px;
+}
 
 .menu-list-item-title {
-	float:right;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
+	/*text-align: right;*/
+	margin-left: 10px;
+	line-height: 25px;
 }

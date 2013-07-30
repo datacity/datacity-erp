@@ -6,9 +6,9 @@ enyo.kind({
 			{content: "Logo", classes: "menu-header"},
 			{kind: "Scroller", fit: true, components: [
 				{kind: "Repeater", name: "list", onSetupItem: "setupItem", components: [
-					{name: "item", classes: "menu-list-item enyo-border-box", ontap: "listTapped", components: [
-					    {name: "thumbnail", kind: "Image", classes: "menu-list-item-thumbnail"},
-						{name: "name", classes: "menu-list-item-title"}
+					{kind: "FittableColumns", name: "item", classes: "menu-list-item", ontap: "listTapped", components: [
+					    {kind: "Image", name: "thumbnail", classes: "menu-list-item-thumbnail"},
+						{name: "name", classes: "menu-list-item-title", fit: true}
 					]}
 				]}
 			]}
