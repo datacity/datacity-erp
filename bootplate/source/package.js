@@ -9,6 +9,7 @@ enyo.depends(
 	"Menu.css",
 	"About.js",
 	"Categories.js",
+	"Categories.css",
 	"Favorites.js",
 	"Map.js",
 	"Search.js"
