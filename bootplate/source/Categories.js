@@ -6,12 +6,16 @@ enyo.kind({
 		{kind: "Panels", name: "categoriesPanels", fit: true, draggable: false, classes: "panels-lists", arrangerKind: "CollapsingArranger", wrap: false, components: [
 			{name: "left", components: [
 				{kind: "List", name: "categoriesList", classes: "enyo-fit", onSetupItem: "setupCategories", components: [
-					{name: "panelcategoriescontent", ontap: "categoriesListTapped", classes: "panel-list-item"}
+					{kind: "onyx.Item", ontap: "categoriesListTapped", classes: "panel-list-item", components: [
+						{name: "panelcategoriescontent"}
+					]}
 				]}
 			]},
 			{name: "middle", components: [
 				{kind: "List", name: "buildingList", classes: "enyo-fit", onSetupItem: "setupBuilding", components: [
-					{name: "panelbuildingcontent", ontap: "buildingListTapped", classes: "panel-list-item"}
+					{kind: "onyx.Item", ontap: "buildingListTapped", classes: "panel-list-item", components: [
+						{name: "panelbuildingcontent"}
+					]}
 				]},
 				{kind: "FittableRows", classes: "backButton", components: [
 					{kind: "onyx.Toolbar", components: [
@@ -19,16 +23,7 @@ enyo.kind({
 					]}
 				]}
 			]},
-			{name: "body", fit: true, components: [
-   				{kind: "Scroller", name: "buildingContent", classes: "enyo-fit", touch: true, components: [
-   					{name: "content", classes: "panel-item-content"}
-   				]},
-   				{kind: "FittableRows", classes: "backButton", components: [
-  					{kind: "onyx.Toolbar", components: [
-  						{kind: "onyx.Button", content:"Retour", ontap: "buttonBackPressed"}
-  					]}
-  				]}
-   			]}
+			{kind: "BatimentPanel", name: "body"}
 		]}
 	],
 	create: function() {
@@ -75,7 +70,6 @@ enyo.kind({
 
 		console.log("Batiment cliquée = " + item.name);
 		
-		this.$.buildingContent.render();
 		this.$.categoriesPanels.next();
 	},
 	setupBuilding: function(inSender, inEvent) {
