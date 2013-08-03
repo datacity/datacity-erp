@@ -17,12 +17,48 @@ body {
 
 
 .panels > * {
-	width: 320px;
+	width: 100%;
+	background-color: #eaeaea;
+}
+
+.panel-border > * {
 	box-shadow: -4px 0px 8px rgba(0,0,0,0.35);
 	-moz-box-shadow: -4px 0px 8px rgba(0,0,0,0.35);
 	-o-box-shadow: -4px 0px 8px rgba(0,0,0,0.35);
 	-webkit-box-shadow: -4px 0px 12px rgba(0,0,0,0.4);
-	background-color: #ccc;
+}
+
+/* Toolbar menu */
+.app-toolbar {
+	border-bottom: 1px solid #3923d6;
+	background-color: #2966B8;
+}
+
+.app-toolbar .icon {
+	background-color: transparent;
+	border: 0px;
+	margin: 0;
+	padding: 10px 12px;
+}
+
+.app-toolbar .icon img {
+	width: 30px;
+	height: 30px;
+}
+
+.app-toolbar .icon:active {
+	background-color: #3923d6;
+}
+
+.app-toolbar {
+}
+
+.app-toolbar .title {
+	color: #fff;
+	text-align: center;
+	line-height: 50px;
+	border-left: 1px solid #3923d6;
+	border-right: 1px solid #3923d6;
 }
 
 /*
@@ -34,3 +70,11 @@ body {
     min-zoom: 1;
 }
 */
+
+/* Toolbar */
+
+.toolbar {
+	border-top: 1px solid #333;
+	background-color: #666;
+	padding: 10px;
+}

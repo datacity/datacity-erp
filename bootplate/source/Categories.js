@@ -1,92 +1,82 @@
 enyo.kind({
 	name: "CategoriesPanel",
 	kind: "FittableRows",
-	classes: "onyx enyo-fit",
+	classes: "enyo-unselectable",
 	components: [
-		{kind: "Panels", name: "categoriesPanels", fit: true, draggable: false, classes: "panels-lists", arrangerKind: "CollapsingArranger", wrap: false, components: [
-			{name: "left", components: [
+		{kind: "Panels", name: "categoriesPanels", fit: true, draggable: false, classes: "panels categories-panel", arrangerKind: "CollapsingArranger", wrap: false, components: [
+			{kind: "FittableRows", components: [
 				{kind: "List", name: "categoriesList", classes: "enyo-fit", onSetupItem: "setupCategories", components: [
-					{kind: "onyx.Item", ontap: "categoriesListTapped", classes: "panel-list-item", components: [
-						{name: "panelcategoriescontent"}
+					{ontap: "categoriesListTapped", classes: "panel-list-item", components: [
+						{name: "numberBatiments", classes: "categories-number-category"},
+						{name: "textCategory", classes: "categories-text-category"}
 					]}
 				]}
 			]},
-			{name: "middle", components: [
-				{kind: "List", name: "buildingList", classes: "enyo-fit", onSetupItem: "setupBuilding", components: [
+			{kind: "FittableRows", classes: "enyo-fit", components: [
+				{name: "title", classes: "categories-title"},
+				{kind: "List", name: "buildingList", fit: true, onSetupItem: "setupBuilding", components: [
 					{kind: "onyx.Item", ontap: "buildingListTapped", classes: "panel-list-item", components: [
 						{name: "panelbuildingcontent"}
 					]}
 				]},
-				{kind: "FittableRows", classes: "backButton", components: [
-					{kind: "onyx.Toolbar", components: [
-						{kind: "onyx.Button", content:"Retour", ontap: "buttonBackPressed"}
-					]}
+				{kind: "FittableColumns", classes: "toolbar", components: [
+					{kind: "Button", content:"Retour", ontap: "buttonBackPressed"}
 				]}
 			]},
-			{kind: "BatimentPanel", name: "body"}
+			{kind: "BatimentPanel", name: "batimentView"}
 		]}
 	],
 	create: function() {
 		this.inherited(arguments);
 
+	},
+	setData: function() {
+		this.categories = enyo.batiments.getCategories();
+
 		this.$.categoriesList.setCount(this.categories.length);
+		this.$.categoriesList.render();
 	},
 	setupCategories: function(inSender, inEvent) {
 		var item = this.categories[inEvent.index];
-		//this.$.categoriesList.addRemoveClass("listitemselected", inSender.isSelected(inEvent.index));
-		//this.$.panelcategoriescontent.addRemoveClass("listitemselected", inSender.isSelected(inEvent.index));
-		this.$.panelcategoriescontent.setContent(item);
-		
+
+		this.$.textCategory.setContent(item.name);
+		this.$.numberBatiments.setContent(item.batiments.length);	
 	},
 	categoriesListTapped: function(inSender, inEvent) {
 		var i = inEvent.index;
-		this.filtered = [];
-
-		for (var numBuilding in this.building) {
-			var building = this.building[numBuilding];
-			for (var category in building.categories) {
-				if (building.categories[category] == i)
-					this.filtered.push(building);
-			}
-		}
 		
-//		inSender.applyStyle("background-color", "#C4E3FE");
-//	    var waitAndClear = setInterval(function(){
-////	    	inSender.applyStyle("background-color", "");
-//	        enyo.log("TIMER");
-//	        clearRowLight(inSender);
-//	        clearInterval(waitAndClear);
-//	    }, 500);
-	    
+		this.batiments = [];
+		for (var id in this.categories[i].batiments) {
+			this.batiments.push(enyo.batiments.getBatiment(this.categories[i].batiments[id]));
+		}
+		this.batiments.sort(function(a, b) {
+			if (a.name < b.name)
+				return -1;
+			else if (a.name > b.name)
+				return 1;
+			else
+				return 0; 
+		});
 
-		//this.$.categoriesList.addRemoveClass("listitemselected", inSender.isSelected(inEvent.index));
-		this.$.buildingList.setCount(this.filtered.length);
+		this.$.title.setContent(this.categories[i].name);
+		this.$.buildingList.setCount(this.batiments.length);
 		this.$.buildingList.render();
 		this.$.categoriesPanels.next();
 	},
 	buildingListTapped: function(inSender, inEvent) {
 		var i = inEvent.index;
-		var item = this.filtered[i];
+		var item = this.batiments[i];
 
-		console.log("Batiment cliquée = " + item.name);
-		
+		this.$.batimentView.updateView(item);
 		this.$.categoriesPanels.next();
 	},
 	setupBuilding: function(inSender, inEvent) {
 		var i = inEvent.index;
-		var item = this.filtered[i];
+		var item = this.batiments[i];
 
-		this.$.panelbuildingcontent.addRemoveClass("listitemselected", inSender.isSelected(inEvent.index));
 		this.$.panelbuildingcontent.setContent(item.name);
 	},
 	buttonBackPressed: function(inSender, inEvent) {
 		this.$.categoriesPanels.previous();
-	},
-	building: [
-		{name: "Batiment1", categories: [1, 2]},
-		{name: "Batiment2", categories: [0, 2]},
-		{name: "Batiment3", categories: [0, 1, 2]}
-	],
-	categories: ['Categorie 1', 'Categorie 2','Categorie 3', 'Categorie 4', 'Categorie 5','Categorie 6', 'Categorie 7', 'Categorie 8','Categorie 9']
-
+	}
 });

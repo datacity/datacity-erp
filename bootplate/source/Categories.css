@@ -1,21 +1,39 @@
-.panels-lists > * {
-	width: 320%;
-	background-color: #EAEAEA;
-	-moz-box-shadow: -4px 0 4px rgba(0,0,0,0.3);
-	-webkit-box-shadow: -4px 0 4px rgba(0,0,0,0.3);
-	box-shadow: -4px 0 4px rgba(0,0,0,0.3);
+.categories-panel > * {
+	width: 320px;
 }
 
 .panel-list-item {
-	padding: 10px;
-	border-bottom: 1px solid black;
+	padding: 5px;
+	border-bottom: 1px solid #666;
 }
 
-.panel-item-content {
-	text-align: left;
-	padding: 10px;
+.categories-title {
+	background-color: #aaa;
+	text-align: center;
+	line-height: 20px;
+	height: 30px;
+	max-height: 30px;
+	padding: 5px;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
+.categories-text-category {
+	padding: 5px;
+}
+
+.categories-number-category {
+	float: right;
+	padding: 5px;
+	margin: 0 5px;
+	min-width: 25px;
+	text-align: center;
+	border-radius: 10px;
+	background-color: #aaa;
+}
+
+
+/* Toolbar */
 .backButton {
 	min-width: 320px; 
 	position:absolute; 

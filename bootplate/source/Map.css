@@ -1,0 +1,16 @@
+.map-content {
+	padding: 10px 5px;
+}
+
+.map-content .map-button {
+	margin: 5px;
+}
+
+.map-button {
+	background-color: rgba(30, 30, 30, 0.3);
+	border: 2px solid #666;
+	width: 35px;
+	padding: 2px;
+	line-height: 30px;
+	height: 30px;
+}

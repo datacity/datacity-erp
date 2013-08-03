@@ -1,20 +1,25 @@
 enyo.kind({
 	name: "BatimentPanel",
+	kind: "FittableRows",
+	classes: "onyx enyo-fit",
 	components: [
-		{kind: "FittableRows", classes: "enyo-fit", components: [
-   			{kind: "Scroller", name: "buildingContent", fit: true, components: [
-				{name: "content", classes: "panel-item-content"}
-			]},
-			{kind: "onyx.Toolbar", components: [
-				{kind: "onyx.Button", content:"Retour", ontap: "buttonBackPressed"}
+		{kind: "Scroller", fit: true, components: [
+			{kind: "FittableRows", components: [
+				{style: "width: 100%; height: 200px; background-color: orange;"},
+				{name: "name", content: ""}
 			]}
+		]},
+		{kind: "onyx.Toolbar", components: [
+			{content: "detail"}
 		]}
 	],
 	create: function() {
 		this.inherited(arguments);
 		
 	},
-	buttonBackPressed: function(inSender, inEvent) {
-		enyo.$.app.$.categories.$.categoriesPanels.previous();
+	updateView: function(batiment) {
+		this.batiment = batiment;
+		console.log(batiment);
+		this.$.name.setContent(this.batiment.name);
 	}
 });
