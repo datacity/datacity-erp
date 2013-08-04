@@ -8,11 +8,13 @@ enyo.depends(
 	"Menu.js",
 	"Menu.css",
 	"About.js",
+	"About.css",
 	"Categories.js",
 	"Categories.css",
 	"Favorites.js",
 	"Favorites.css",
 	"Batiment.js",
+	"Batiment.css",
 	"Map.js",
 	"Map.css",
 	"Search.js"
