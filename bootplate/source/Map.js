@@ -77,7 +77,8 @@ enyo.kind({
 			this.poiGroup.addLayer(marker);
 			(function(batiment) {
 				marker.on('click', function(e) {
-					console.log(batiment);
+					enyo.$.app.$.batimentView.updateView(batiment);
+					enyo.$.app.$.contentPanels.setIndex(5);
 				});
 			})(batiments[i]);
 

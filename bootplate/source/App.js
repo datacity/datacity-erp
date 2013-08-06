@@ -21,7 +21,13 @@ enyo.kind({
 					{kind: "CategoriesPanel", name: "categories"},
 					{kind: "FavoritesPanel", name: "favorites"},
 					{kind: "SearchPanel", name: "search"},
-					{kind: "AboutPanel", name: "about"}
+					{kind: "AboutPanel", name: "about"},
+					{kind: "FittableRows", components: [
+						{kind: "BatimentPanel", name: "batimentView", fit: true},
+						{kind: "FittableColumns", classes: "toolbar", components: [
+							{kind: "Button", content:"Retour", ontap: "backDetail"}
+						]}
+					]}
 				]}
 			]}
     	]}
@@ -157,5 +163,8 @@ enyo.kind({
 
 		this.$.categories.setData();
 		this.$.map.addBatiments(all);
+	},
+	backDetail: function(inSender, inEvent) {
+		this.$.contentPanels.setIndex(0);
 	}
 });
