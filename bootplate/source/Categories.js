@@ -23,7 +23,12 @@ enyo.kind({
 					{kind: "Button", content:"Retour", ontap: "buttonBackPressed"}
 				]}
 			]},
-			{kind: "BatimentPanel", name: "batimentView"}
+			{kind: "FittableRows", components: [
+				{kind: "BatimentPanel", name: "batimentView", fit: true},
+				{kind: "FittableColumns", classes: "toolbar", components: [
+					{kind: "Button", content:"Retour", ontap: "buttonBackPressed"}
+				]}
+			]}
 		]}
 	],
 	create: function() {

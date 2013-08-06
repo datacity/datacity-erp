@@ -26,7 +26,24 @@ enyo.kind({
 		// var bounds = new L.LatLngBounds(new L.LatLng(43.66, 3.78), new L.LatLng(43.55, 3.97));
 		// this.$.map.setMaxBounds(bounds);
 
+		this.poiGroup = new L.LayerGroup();
+		this.$.map.addLayer(this.poiGroup);
+
+		var Icon = L.Icon.extend({
+			options:{
+				shadowUrl: null,
+				iconSize: new L.Point(32, 37),
+				className: "map-icon"
+			}
+		});
+		this.icons = {
+			"default": new Icon({iconUrl: "assets/default.png"})
+		};
+
 		this.btnGeoloc();
+
+		enyo.$.app.getData();
+
 	},
 	btnZoomOut: function() {
 		this.$.map.zoomOut();
@@ -49,5 +66,24 @@ enyo.kind({
 	        }
 	    });
 	    map.locate({ setView: true, maxZoom: 16 });
+	},
+	addBatiments: function(batiments) {
+		for (var i = 0, length = batiments.length; i < length; i++) {
+			if (batiments[i].latitude > 0 && batiments[i].longitude > 0) {
+
+			var marker = new L.Marker(new L.LatLng(batiments[i].latitude, batiments[i].longitude), {
+				icon: batiments[i].categorie in this.icons ? this.icons[batiments[i].categorie] : this.icons["default"]
+			});
+			this.poiGroup.addLayer(marker);
+			(function(batiment) {
+				marker.on('click', function(e) {
+					console.log(batiment);
+				});
+			})(batiments[i]);
+
+
+
+			}
+		}
 	}
 });

@@ -45,6 +45,13 @@ enyo.kind({
 				return null;
 			};
 
+			var serialize = function() {
+				return {
+						"categories": categories,
+						"batiments": batiments
+					};
+			};
+
 			return {
 				add: function(batiment) {
 					var id = batiments.push(batiment) - 1;
@@ -66,6 +73,9 @@ enyo.kind({
 				getBatiment: function(id) {
 					return batiments[id];
 				},
+				getAllBatiments: function() {
+					return batiments;
+				},
 				sortCategories: function() {
 					categories.sort(function(a, b) {
 						if (a.name < b.name)
@@ -76,24 +86,21 @@ enyo.kind({
 							return 0; 
 					});
 				},
-				serialize: function() {
-					return {
-						"categories": categories,
-						"batiments": batiments
-					};
-				}
+				"serialize": serialize
 			};
 		}();
 
-		if (!localStorage.batiments) {
-			this.$.data.send();
-		} else {
-			this.processData();
-		}
 
 		// this.$.contentPanels.setIndex(1);
 		// this.$.categories.$.categoriesPanels.setIndex(2);
 
+	},
+	getData: function() {
+		if (!localStorage.batiments) {
+			this.$.data.send();
+		} else {
+			this.processData();
+		}		
 	},
 	gotoMenu: function(inSender, inEvent) {
 		this.$.mainPanels.setIndex(this.$.mainPanels.index == 1 ? 0 : 1);
@@ -109,17 +116,46 @@ enyo.kind({
 			for (var i = 0, length = data.response.length; i < length; i++) {
 				enyo.batiments.add(data.response[i]);
 			}
+			enyo.batiments.sortCategories();
+			localStorage.batiments = JSON.stringify(enyo.batiments.serialize());
 			this.processData();
 		}
 	},
 	proccessError: function(inSender, inEvent) {
-		console.log("Erreur ajax");
+		console.log("Erreur ajax. Impossible de récupérer les batiments");
 	},
 	processData: function() {
-		enyo.batiments.sortCategories();
-		localStorage.batiments = JSON.stringify(enyo.batiments.serialize());
+		var all = enyo.batiments.getAllBatiments();
+		for (var id in all) {
+			var batiment = all[id];
+			if (batiment.latitude == 0 || batiment.longitude == 0) {
+				var adress = batiment.adress.split(" ");
+				for (var i in adress) {
+					if (adress[i].length == 5 && adress[i].indexOf("34", 0) != -1) {
+						adress.splice(i, 1);
+					}
+				}
+				(function(map, batiment) {
+					var ajax = new enyo.Ajax({
+						url: "http://nominatim.openstreetmap.org/search?q=" + adress.join(" ").replace(/ /g, "+") + "&format=json"
+					});
+					ajax.go();
+					ajax.response(function(inSender, inResponse) {
+						if (inResponse.length > 0) {
+							batiment.latitude = inResponse[0].lat;
+							batiment.longitude = inResponse[0].lon;
+							localStorage.batiments = JSON.stringify(enyo.batiments.serialize());
+							console.log("Géoloc trouvée : " + batiment.name);
+							map.addBatiments([batiment]);
+						} else {
+							console.log("ERREUR - Géoloc non trouvée : " + batiment.name);
+						}
+					});					
+				})(this.$.map, batiment);
+			}
+		}
 
 		this.$.categories.setData();
-
+		this.$.map.addBatiments(all);
 	}
 });

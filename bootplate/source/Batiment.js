@@ -1,10 +1,9 @@
 enyo.kind({
 	name: "BatimentPanel",
-	kind: "FittableRows",
-	classes: "onyx enyo-fit",
+	classes: "",
 	components: [
-		{kind: "Scroller", fit: true, components: [
-			{kind: "FittableRows", components: [
+		{kind: "Scroller", components: [
+			// {kind: "FittableRows", components: [
 //				{style: "width: 100%; height: 200px; background-color: orange;"},
 				{kind: "Image", name: "thumbnail", classes: "content-thumbnail"},
 				{name: "title", classes: "content-title"},
@@ -16,7 +15,7 @@ enyo.kind({
 				     {name: "phone"},
 				     {name: "website"}
 				]}
-			]}
+			// ]}
 		]}
 	],
 	create: function() {
