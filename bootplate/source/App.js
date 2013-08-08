@@ -36,30 +36,42 @@ enyo.kind({
 		this.inherited(arguments);
 
 		enyo.batiments = function() {
-			if (localStorage.batiments) {
-				var saved = JSON.parse(localStorage.batiments);
-			}
-			//var test = this.initGenericCategories();
-			var genericCategories = saved ? saved.genericCategories : test;
+			var genericCategories = {
+				"adresses utiles": "Divers",
+				"agglomération": "Social",
+				"associations": "Culture",
+				"auto modélisme": "Culture",
+				"autres contacts utiles": "Divers",
+				"autres lieux": "Divers",
+				"baby sitting": "Social",
+				"base ball": "Sport",
+				"bases nautiques": "Jeunesse",
+				"beach volley": "Sport",
+				"bibliothèques et médiathèques": "Culture",
+				"boule lyonnaise": "Sport",
+				"boulodromes de pétanque": "Sport",
+				"centre équestre": "Sport",
+				"centres de loisirs associatifs": "Culture"
+			};
+
+			// if (localStorage.batiments) {
+			// 	var saved = JSON.parse(localStorage.batiments);
+			// }
+			var saved = undefined;
 			var categories = saved ? saved.categories : [];
 			var batiments = saved ? saved.batiments : [];
 
 			var getCategory = function(category) {
 				for (var item in categories) {
-					if (categories[item].name == category) {
+					if (categories[item].name === category) {
 						return categories[item];
 					}
 				}
 				return null;
 			};
-			
-			var getGenericCategory = function(category) {
-				return genericCategories[category];
-			};
 
 			var serialize = function() {
 				return {
-						"genericCategories": genericCategories,
 						"categories": categories,
 						"batiments": batiments
 					};
@@ -69,26 +81,17 @@ enyo.kind({
 				add: function(batiment) {
 					var id = batiments.push(batiment) - 1;
 					var catName = batiment.categorie.trim().toLowerCase();
-					catName = catName.charAt(0).toUpperCase() + catName.substring(1, catName.length);
-					//ICI Recuperation de la cat.
-					var genCategory = getGenericCategory(catName);
-					var category = getCategory(catName);
+					var newName = genericCategories[catName] ? genericCategories[catName] : "Autre";
+					var category = getCategory(newName);
 					
 					if (!category) {
 						categories.push({
-							name: catName,
+							name: newName,
 							batiments: [id],
-							//ICI Ajout de la cat.
-							genCat: genCategory
 						});
 					} else {
-						//ICI Ajout de la cat.
-						category.genCat = genCategory;
 						category.batiments.push(id);
 					}
-				},
-				getGenericCategories: function() {
-					return genericCategories;
 				},
 				getCategories: function() {
 					return categories;
@@ -118,29 +121,6 @@ enyo.kind({
 		// this.$.categories.$.categoriesPanels.setIndex(2);
 
 	},
-	initGenericCategories: function() {
-		var mapKey = new Object();
-		
-		// Les categories generiques : Administration / Culture / Sport / Jeunesse / Santé / Social / Enseignement / Divers (/ Culte)
-		
-		mapKey["adresses utiles"] = "Divers";
-		mapKey["agglomération"] = "Social";
-		mapKey["associations"] = "Culture";
-		mapKey["auto modélisme"] = "Culture";
-		mapKey["autres contacts utiles"] = "Divers";
-		mapKey["autres lieux"] = "Divers";
-		mapKey["baby sitting"] = "Social";
-		mapKey["base ball"] = "Sport";
-		mapKey["bases nautiques"] = "Jeunesse";
-		mapKey["beach volley"] = "Sport";
-		mapKey["bibliothèques et médiathèques"] = "Culture";
-		mapKey["boule lyonnaise"] = "Sport";
-		mapKey["boulodromes de pétanque"] = "Sport";
-		mapKey["centre équestre"] = "Sport";
-		mapKey["centres de loisirs associatifs"] = "Culture";
-		
-		return mapKey;
-	},
 	getData: function() {
 		if (!localStorage.batiments) {
 			this.$.data.send();
@@ -163,6 +143,7 @@ enyo.kind({
 				enyo.batiments.add(data.response[i]);
 			}
 			enyo.batiments.sortCategories();
+			console.log(enyo.batiments.serialize());
 			localStorage.batiments = JSON.stringify(enyo.batiments.serialize());
 			this.processData();
 		}
