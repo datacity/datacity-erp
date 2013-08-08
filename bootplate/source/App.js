@@ -39,6 +39,8 @@ enyo.kind({
 			if (localStorage.batiments) {
 				var saved = JSON.parse(localStorage.batiments);
 			}
+			//var test = this.initGenericCategories();
+			var genericCategories = saved ? saved.genericCategories : test;
 			var categories = saved ? saved.categories : [];
 			var batiments = saved ? saved.batiments : [];
 
@@ -50,9 +52,14 @@ enyo.kind({
 				}
 				return null;
 			};
+			
+			var getGenericCategory = function(category) {
+				return genericCategories[category];
+			};
 
 			var serialize = function() {
 				return {
+						"genericCategories": genericCategories,
 						"categories": categories,
 						"batiments": batiments
 					};
@@ -63,15 +70,25 @@ enyo.kind({
 					var id = batiments.push(batiment) - 1;
 					var catName = batiment.categorie.trim().toLowerCase();
 					catName = catName.charAt(0).toUpperCase() + catName.substring(1, catName.length);
+					//ICI Recuperation de la cat.
+					var genCategory = getGenericCategory(catName);
 					var category = getCategory(catName);
+					
 					if (!category) {
 						categories.push({
 							name: catName,
-							batiments: [id]
+							batiments: [id],
+							//ICI Ajout de la cat.
+							genCat: genCategory
 						});
 					} else {
+						//ICI Ajout de la cat.
+						category.genCat = genCategory;
 						category.batiments.push(id);
 					}
+				},
+				getGenericCategories: function() {
+					return genericCategories;
 				},
 				getCategories: function() {
 					return categories;
@@ -100,6 +117,29 @@ enyo.kind({
 		// this.$.contentPanels.setIndex(1);
 		// this.$.categories.$.categoriesPanels.setIndex(2);
 
+	},
+	initGenericCategories: function() {
+		var mapKey = new Object();
+		
+		// Les categories generiques : Administration / Culture / Sport / Jeunesse / Santé / Social / Enseignement / Divers (/ Culte)
+		
+		mapKey["adresses utiles"] = "Divers";
+		mapKey["agglomération"] = "Social";
+		mapKey["associations"] = "Culture";
+		mapKey["auto modélisme"] = "Culture";
+		mapKey["autres contacts utiles"] = "Divers";
+		mapKey["autres lieux"] = "Divers";
+		mapKey["baby sitting"] = "Social";
+		mapKey["base ball"] = "Sport";
+		mapKey["bases nautiques"] = "Jeunesse";
+		mapKey["beach volley"] = "Sport";
+		mapKey["bibliothèques et médiathèques"] = "Culture";
+		mapKey["boule lyonnaise"] = "Sport";
+		mapKey["boulodromes de pétanque"] = "Sport";
+		mapKey["centre équestre"] = "Sport";
+		mapKey["centres de loisirs associatifs"] = "Culture";
+		
+		return mapKey;
 	},
 	getData: function() {
 		if (!localStorage.batiments) {

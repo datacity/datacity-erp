@@ -64,6 +64,7 @@ enyo.kind({
 		});
 
 		this.$.title.setContent(this.categories[i].name);
+		console.log(this.categories[i]);
 		this.$.buildingList.setCount(this.batiments.length);
 		this.$.buildingList.render();
 		this.$.categoriesPanels.next();

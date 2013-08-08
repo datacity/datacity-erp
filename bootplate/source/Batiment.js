@@ -12,7 +12,7 @@ enyo.kind({
 				     {name: "description"},
 				     {tag: "br"},
 				     {name: "adress"},
-				     {name: "phone"},
+				     {name: "phone", ontap: "callNumber"},
 				     {name: "website"}
 				]}
 			// ]}
@@ -41,6 +41,14 @@ enyo.kind({
 		if (this.batiment.phone == "" || this.batiment.phone == null)
 			this.$.phone.setContent("Pas de téléphone.");
 		else
-			this.$.phone.setContent("Telephone : " + this.batiment.phone);
+			this.$.phone.setContent("Telephone :" + this.batiment.phone);
+			
+		if (this.batiment.website == "" || this.batiment.website == null)
+			this.$.website.setContent("Pas de site internet.");
+		else
+			this.$.website.setContent("Site internet : " + this.batiment.website);
+	},
+	callNumber: function() {
+		window.open('tel://' + this.batiment.phone);
 	}
 });
