@@ -54,10 +54,9 @@ enyo.kind({
 				"centres de loisirs associatifs": "Culture"
 			};
 
-			// if (localStorage.batiments) {
-			// 	var saved = JSON.parse(localStorage.batiments);
-			// }
-			var saved = undefined;
+			if (localStorage.batiments) {
+				var saved = JSON.parse(localStorage.batiments);
+			}
 			var categories = saved ? saved.categories : [];
 			var batiments = saved ? saved.batiments : [];
 
@@ -83,6 +82,8 @@ enyo.kind({
 					var catName = batiment.categorie.trim().toLowerCase();
 					var newName = genericCategories[catName] ? genericCategories[catName] : "Autre";
 					var category = getCategory(newName);
+
+					batiment.name = batiment.name.trim();
 					
 					if (!category) {
 						categories.push({
@@ -117,7 +118,7 @@ enyo.kind({
 		}();
 
 
-		// this.$.contentPanels.setIndex(1);
+		// this.$.contentPanels.setIndex(3);
 		// this.$.categories.$.categoriesPanels.setIndex(2);
 
 	},
@@ -132,6 +133,7 @@ enyo.kind({
 		this.$.mainPanels.setIndex(this.$.mainPanels.index == 1 ? 0 : 1);
 	},
 	gotoSearch: function(inSender, inEvent) {
+		this.$.title.setContent("Rechercher");
 		this.$.mainPanels.setIndex(1);
 		this.$.contentPanels.setIndex(3);
 	},
@@ -184,8 +186,16 @@ enyo.kind({
 
 		this.$.categories.setData();
 		this.$.map.addBatiments(all);
+		this.$.search.setSearch(all);
+	},
+	setBackBatiment: function(name) {
+		this.currentPanelBatiment = name;
 	},
 	backDetail: function(inSender, inEvent) {
-		this.$.contentPanels.setIndex(0);
+		if (this.currentPanelBatiment === "search") {
+			this.$.contentPanels.setIndex(3);
+		} else {
+			this.$.contentPanels.setIndex(0);
+		}
 	}
 });

@@ -75,16 +75,20 @@ enyo.kind({
 				icon: batiments[i].categorie in this.icons ? this.icons[batiments[i].categorie] : this.icons["default"]
 			});
 			this.poiGroup.addLayer(marker);
-			(function(batiment) {
+			(function(batiment, panelName) {
 				marker.on('click', function(e) {
 					enyo.$.app.$.batimentView.updateView(batiment);
+					enyo.$.app.setBackBatiment(panelName);
 					enyo.$.app.$.contentPanels.setIndex(5);
 				});
-			})(batiments[i]);
+			})(batiments[i], this.name);
 
 
 
 			}
 		}
+	},
+	gotoPoint: function(latitude, longitude) {
+		this.$.map.setView(new L.LatLng(latitude, longitude), 18);
 	}
 });

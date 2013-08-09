@@ -31,7 +31,7 @@ enyo.kind({
 		this.inherited(arguments);
 
 		var cloudMade = new L.TileLayer("http://{s}.tile.cloudmade.com/78eab727fd024b2a9b889e3236c70394/68943/256/{z}/{x}/{y}.png", {
-			maxZoom: 18
+			maxZoom: 18 
 		});
 		var osm = new L.TileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 			maxZoom: 18
@@ -85,5 +85,8 @@ enyo.kind({
 	},
 	setScrollWheelZoom: function(inValue) {
 		this.map.scrollWheelZoom(inValue);
+	},
+	setView: function(point, zoom) {
+		this.map.setView(point, zoom);
 	}
 });

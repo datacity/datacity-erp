@@ -1,0 +1,21 @@
+.search-input {
+	width: 100%;
+	margin: 0;
+	font-size: 1em;
+	height: 40px;
+}
+
+.search-item-divider {
+	background-color: #aaa;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 8px 14px;
+}
+
+/* Also used in map panel for animal popup */
+.search-item {
+	border-top: 1px solid silver;
+	padding: 5px;
+	min-height: 30px;
+	line-height: 30px;
+}

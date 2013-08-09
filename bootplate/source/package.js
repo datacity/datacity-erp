@@ -17,5 +17,6 @@ enyo.depends(
 	"Batiment.css",
 	"Map.js",
 	"Map.css",
-	"Search.js"
+	"Search.js",
+	"Search.css"
 );
