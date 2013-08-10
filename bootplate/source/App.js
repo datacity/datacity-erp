@@ -119,6 +119,7 @@ enyo.kind({
 					var category = getCategory(newName);
 
 					batiment.name = batiment.name.trim();
+					batiment.id = id;
 					
 					if (!category) {
 						categories.push({
@@ -219,6 +220,7 @@ enyo.kind({
 			}
 		}
 
+		this.$.favorites.setFavorites();
 		this.$.categories.setData();
 		this.$.map.addBatiments(all);
 		this.$.search.setSearch(all);
@@ -229,6 +231,9 @@ enyo.kind({
 	backDetail: function(inSender, inEvent) {
 		if (this.currentPanelBatiment === "search") {
 			this.$.contentPanels.setIndex(3);
+		}
+		else if (this.currentPanelBatiment === "favorites") {
+			this.$.contentPanels.setIndex(2);
 		} else {
 			this.$.contentPanels.setIndex(0);
 		}
