@@ -37,21 +37,56 @@ enyo.kind({
 
 		enyo.batiments = function() {
 			var genericCategories = {
-				"adresses utiles": "Divers",
-				"agglomération": "Social",
-				"associations": "Culture",
-				"auto modélisme": "Culture",
-				"autres contacts utiles": "Divers",
-				"autres lieux": "Divers",
-				"baby sitting": "Social",
-				"base ball": "Sport",
-				"bases nautiques": "Jeunesse",
-				"beach volley": "Sport",
-				"bibliothèques et médiathèques": "Culture",
-				"boule lyonnaise": "Sport",
-				"boulodromes de pétanque": "Sport",
-				"centre équestre": "Sport",
-				"centres de loisirs associatifs": "Culture"
+					"agglomération": "Social",
+					"associations": "Culture",
+					"auto modélisme": "Culture",
+					"baby sitting": "Social",
+					"base ball": "Sport",
+					"bases nautiques": "Loisir",
+					"beach volley": "Sport",
+					"bibliothèques et médiathèques": "Culture",
+					"boule lyonnaise": "Sport",
+					"boulodromes de pétanque": "Sport",
+					"centre équestre": "Sport",
+					"centres de loisirs associatifs": "Loisir",
+					"centres de loisirs des maisons pour tous": "Loisir",
+					"centres de recherche": "Loisir",
+					"cinémas": "Loisir",
+					"cliniques": "Santé",
+					"clubs sportifs": "Sport",
+					"collèges": "Enseignement",
+					"commerce artisanat": "Social",
+					"compagnies": "Culture",
+					"conseils de quartier": "Culture",
+					"consulats": "Administration",
+					"crèches familiales municipales": "Social",
+					"crèches municipales": "Social",
+					"crèches parentales et associatives": "Social",
+					"crèches à horaires atypiques": "Social",
+					"département": "Administration",
+					"ecole d'enseignement supérieur": "Enseignement",
+					"etat": "Administration",
+					"fontaine": "Culture",
+					"galeries d'art": "Culture",
+					"hôpitaux": "Santé",
+					"logement": "Administration",
+					"marchés thématiques": "Culture",
+					"maîtrise de l'énergie": "Administration",
+					"monuments": "Culture",
+					"musées": "Culture",
+					"métiers petite enfance": "Social",
+					"parcs et jardins": "Culture",
+					"piscines": "Sport",
+					"propreté": "Social",
+					"pôles emploi": "Social",
+					//"quartiers": "Administration",
+					"relais assistantes maternelles indépendantes": "Social",
+					//"région": "Administration",
+					//"résidences-foyers": "Social",
+					//"salles": "Social",
+					//"salles d'expo": "Social",
+					"services municipaux": "Administration",
+					"sociétés d'hlm": "Social"
 			};
 
 			if (localStorage.batiments) {
@@ -80,7 +115,7 @@ enyo.kind({
 				add: function(batiment) {
 					var id = batiments.push(batiment) - 1;
 					var catName = batiment.categorie.trim().toLowerCase();
-					var newName = genericCategories[catName] ? genericCategories[catName] : "Autre";
+					var newName = (genericCategories[catName] ? genericCategories[catName] : "Autre");
 					var category = getCategory(newName);
 
 					batiment.name = batiment.name.trim();
@@ -88,7 +123,7 @@ enyo.kind({
 					if (!category) {
 						categories.push({
 							name: newName,
-							batiments: [id],
+							batiments: [id]
 						});
 					} else {
 						category.batiments.push(id);
