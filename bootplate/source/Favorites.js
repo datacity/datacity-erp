@@ -4,19 +4,17 @@ enyo.kind({
 		{kind: "FittableRows", classes: "enyo-fit", components: [
 			{kind: "List", name: "favoritesList", fit: true, onSetupItem: "setupFavorites", components: [
 				{classes: "favorites-list-item", ontap: "buildingTapped", components: [
-					{name: "building", classes: "favorites-list-item-content"},
-					{classes: "favorites-list-item-group-button", components: [
-						{kind: "Button", content: "-", ontap: "deleteItem"}
-					]}
+					{kind: "Button", content: "-", ontap: "deleteItem", classes: "favorites-list-item-button"},
+					{name: "building", classes: "favorites-list-item-content"}
 				]}
 			]}
 		]}
 	],
 	setFavorites: function() {
 		if (!localStorage.favorites) {
-			localStorage.favorites = JSON.stringify({batiments:[]});
+			localStorage.favorites = JSON.stringify([]);
 		}
-		this.favorites = localStorage.favorites ? JSON.parse(localStorage.favorites) : [];
+		this.favorites = JSON.parse(localStorage.favorites);
 
 		this.$.favoritesList.setCount(this.favorites.length);
 		this.$.favoritesList.reset();
@@ -36,8 +34,8 @@ enyo.kind({
 	deleteItem: function(inSender, inEvent) {
 		var i = inEvent.index;
 		var id = this.favorites[i];
-		var index = this.batiments.indexOf(id);
-		this.batiments.splice(index, 1);
+		var index = this.favorites.indexOf(id);
+		this.favorites.splice(index, 1);
 		localStorage.favorites = JSON.stringify(this.favorites);
 
 		this.$.favoritesList.setCount(this.favorites.length);
@@ -46,9 +44,19 @@ enyo.kind({
 		return true;
 	},
 	add: function(id) {
+		if (this.isFavorite(id)) {
+			console.log("Batiment déja en favori");
+			return false;
+		}
 		this.favorites.push(id);
 		localStorage.favorites = JSON.stringify(this.favorites);
 		this.$.favoritesList.setCount(this.favorites.length);
 		this.$.favoritesList.reset();
+
+		return true;
+	},
+	isFavorite: function(id) {
+		var index = this.favorites.indexOf(id);
+		return index >= 0 ? true : false;
 	}
 });
