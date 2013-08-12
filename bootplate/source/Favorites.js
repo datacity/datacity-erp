@@ -29,6 +29,7 @@ enyo.kind({
 		var i = inEvent.index;
 		var batiment = enyo.batiments.getBatiment(this.favorites[i]);
 		enyo.$.app.setBackBatiment(this.name);
+		enyo.$.app.$.batimentView.updateView(batiment);
 		enyo.$.app.$.contentPanels.setIndex(5);
 	},
 	deleteItem: function(inSender, inEvent) {
