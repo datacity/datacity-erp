@@ -181,8 +181,8 @@ enyo.kind({
 	},
 	gotoSearch: function(inSender, inEvent) {
 		this.$.title.setContent("Rechercher");
-		this.$.mainPanels.setIndex(1);
 		this.$.contentPanels.setIndex(3);
+		this.$.mainPanels.setIndex(1);
 	},
 	processResponse: function(inSender, inEvent) {
 		var data = inEvent.data;
