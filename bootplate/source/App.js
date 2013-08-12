@@ -54,6 +54,7 @@ enyo.kind({
 					"cinémas": "Loisir",
 					"cliniques": "Santé",
 					"clubs sportifs": "Sport",
+					"clubs de loisirs": "Loisir",
 					"collèges": "Enseignement",
 					"commerce artisanat": "Social",
 					"compagnies": "Culture",
@@ -97,7 +98,7 @@ enyo.kind({
 
 			var getCategory = function(category) {
 				for (var item in categories) {
-					if (categories[item].name === category) {
+					if (categories[item].name == category) {
 						return categories[item];
 					}
 				}
@@ -113,10 +114,17 @@ enyo.kind({
 
 			return {
 				add: function(batiment) {
-					var id = batiments.push(batiment) - 1;
+					var id = batiments.push(batiment); //- 1;
 					var catName = batiment.categorie.trim().toLowerCase();
-					var newName = (genericCategories[catName] ? genericCategories[catName] : "Autre");
+					console.log("IDIDIDIDID    " + id + "    NAME    " + batiment.name);
+					var newName = genericCategories[catName];
+					if (newName == null || newName == "")
+						newName = "Autre";
+					// = (genericCategories[catName] ? genericCategories[catName] : "Autre");
+					
 					var category = getCategory(newName);
+					
+					console.log("TEST 1 :  " + catName + "   test 2 :  " + newName + "  cat : " + category);
 
 					batiment.name = batiment.name.trim();
 					batiment.id = id;
@@ -132,6 +140,9 @@ enyo.kind({
 				},
 				getCategories: function() {
 					return categories;
+				},
+				getGenericCategories: function() {
+					return genericCategories;
 				},
 				getBatiment: function(id) {
 					return batiments[id];
