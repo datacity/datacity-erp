@@ -56,6 +56,14 @@ enyo.kind({
 
 		return true;
 	},
+	remove: function(id) {
+		this.favorites.splice(this.favorites.indexOf(id), 1);
+		localStorage.favorites = JSON.stringify(this.favorites);
+		this.$.favoritesList.setCount(this.favorites.length);
+		this.$.favoritesList.reset();
+
+		return true;
+	},
 	isFavorite: function(id) {
 		var index = this.favorites.indexOf(id);
 		return index >= 0 ? true : false;

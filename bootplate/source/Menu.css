@@ -6,8 +6,8 @@
 
 .menu-header {
 	width: 100%;
-	height: 80px;
-	background-color: green;
+	height: 18%;
+	border-bottom: 1px solid #0E0E0E;
 }
 
 .menu-list-item {

@@ -3,7 +3,7 @@ enyo.kind({
 	classes: "enyo-unselectable menu-panel",
 	components: [
 		{kind: "FittableRows", classes: "enyo-fit", components: [
-			{content: "Logo", classes: "menu-header"},
+			{kind: "Image", name: "thumbnail", classes: "menu-header"},
 			{kind: "Scroller", fit: true, components: [
 				{kind: "Repeater", name: "list", onSetupItem: "setupItem", components: [
 					{kind: "FittableColumns", name: "item", classes: "menu-list-item", ontap: "listTapped", components: [
@@ -18,6 +18,7 @@ enyo.kind({
 		this.inherited(arguments);
 		
 		this.$.list.setCount(this.list.length);
+		this.$.thumbnail.setSrc("assets/Montpel.png");
 	},
 	setupItem: function(inSender, inEvent) {
 		var index = inEvent.index;

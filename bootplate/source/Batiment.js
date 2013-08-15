@@ -9,25 +9,32 @@ enyo.kind({
 				{kind: "Image", name: "thumbnail", classes: "content-thumbnail"},
 				{name: "title", classes: "content-title"},
 				{tag: "br"},
-				{kind: "FittableColumns", name: "allContent", components: [
-				     {name: "description"},
-				    // {tag: "br"},
-				     {name: "category"},
-				     {tag: "br"},
-				     {name: "adress"},
-				     {tag: "br"},
-				     {name: "phoneName"},
-				     {name: "phone", ontap: "callNumber", style: "color:blue; text-align : right;"},
-				     {tag: "br"},
-				     {name: "websiteName"},
-				     {name: "website", ontap: "openBrowser", style: "color:blue; text-align : right;"},
-				     {tag: "br"},
-				     {name: "mailName"},
-				     {name: "mail", ontap: "sendMail", style: "color:blue; text-align : right;"}
-				]},
-				{kind: "enyo.Button", content: "Afficher sur la carte", ontap: "callMap", classes: "content-button"},
-				{kind: "enyo.Button", content: "Ajouter en favoris", ontap: "callFav", classes: "content-button"}
-			// ]}
+				{kind: "FittableRows", classes: "content-description", components: [
+					{content: "Informations", classes: "content-second-title"},
+					{tag: "br"},
+					{kind: "FittableColumns", name: "allContent", components: [
+					     {name: "description"},
+					    // {tag: "br"},
+					     {name: "category"},
+					     {tag: "br"},
+					     {name: "adress"},
+					     {tag: "br"},
+					     {name: "phoneName"},
+					     {name: "phone", ontap: "callNumber", style: "color:blue; text-align : right;"},
+					     {tag: "br"},
+					     {name: "websiteName"},
+					     {name: "website", ontap: "openBrowser", style: "color:blue; text-align : right;"},
+					     {tag: "br"},
+					     {name: "mailName"},
+					     {name: "mail", ontap: "sendMail", style: "color:blue; text-align : right;"}
+					]},
+					{tag: "br"},
+					{content: "Options", classes: "content-second-title"},
+					{tag: "br"},
+					{kind: "enyo.Button", name: "mapButton", content: "Afficher sur la carte", ontap: "callMap", classes: "content-button"},
+					{tag: "br"},
+					{kind: "enyo.Button", content: "Ajouter en favoris", ontap: "callFav", classes: "content-button"}
+			     ]}
 		]}
 	],
 	create: function() {
@@ -83,6 +90,11 @@ enyo.kind({
 				this.$.mailName.setContent("Email : ");
 				this.$.mail.setContent(this.batiment.email);
 			}
+		
+		if (this.batiment.longitude == "" || this.batiment.longitude == null || this.batiment.longitude == 0)
+			this.$.mapButton.hide();
+		else
+			this.$.mapButton.show();
 	  },
 	callNumber: function() {
 		window.open('tel://' + this.batiment.phone);
@@ -96,11 +108,12 @@ enyo.kind({
 	callMap: function() {
 		enyo.$.app.$.map.gotoPoint(this.batiment.latitude, this.batiment.longitude);
 		enyo.$.app.$.contentPanels.setIndex(0);
+		enyo.$.app.$.title.setContent("Carte");
 	},
 	callFav: function() {
-//		if ( !(enyo.$.app.$.favorites.isAdded(this.batiment.id)) )
+		if ( !(enyo.$.app.$.favorites.isFavorite(this.batiment.id)) )
 			enyo.$.app.$.favorites.add(this.batiment.id);
-//		else
-//			enyo.$.app.$.favorites.remove(this.batiment.id);
+		else
+			enyo.$.app.$.favorites.remove(this.batiment.id);
 	}
 });

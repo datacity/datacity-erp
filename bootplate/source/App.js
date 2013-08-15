@@ -141,8 +141,8 @@ enyo.kind({
 				getCategories: function() {
 					return categories;
 				},
-				getGenericCategories: function() {
-					return genericCategories;
+				getGenericCategory: function(catName) {
+					return genericCategories[catName];
 				},
 				getBatiment: function(id) {
 					return batiments[id];

@@ -37,7 +37,15 @@ enyo.kind({
 			}
 		});
 		this.icons = {
-			"default": new Icon({iconUrl: "assets/default.png"})
+			"default": new Icon({iconUrl: "assets/default.png"}),
+			"Administration": new Icon({iconUrl: "assets/Administration.png"}),
+			"Autre": new Icon({iconUrl: "assets/Autre.png"}),
+			"Culture": new Icon({iconUrl: "assets/Culture.png"}),
+			"Enseignement": new Icon({iconUrl: "assets/Enseignement.png"}),
+			"Loisir": new Icon({iconUrl: "assets/Loisir.png"}),
+			"Santé": new Icon({iconUrl: "assets/Santé.png"}),
+			"Social": new Icon({iconUrl: "assets/Social.png"}),
+			"Sport": new Icon({iconUrl: "assets/Sport.png"})
 		};
 
 		this.btnGeoloc();
@@ -72,7 +80,7 @@ enyo.kind({
 			if (batiments[i].latitude > 0 && batiments[i].longitude > 0) {
 
 			var marker = new L.Marker(new L.LatLng(batiments[i].latitude, batiments[i].longitude), {
-				icon: batiments[i].categorie in this.icons ? this.icons[batiments[i].categorie] : this.icons["default"]
+				icon: enyo.batiments.getGenericCategory(batiments[i].categorie.trim().toLowerCase()) in this.icons ? this.icons[enyo.batiments.getGenericCategory(batiments[i].categorie.trim().toLowerCase())] : this.icons["Autre"]
 			});
 			this.poiGroup.addLayer(marker);
 			(function(batiment, panelName) {
