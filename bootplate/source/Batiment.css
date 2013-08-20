@@ -6,8 +6,21 @@
 
 .batiment-title {
 	font-size: 24px;
+	margin-bottom: 10px;
 }
 
 .batiment-border {
 	padding: 10px;
+}
+
+.batiment-favorite {
+	width: 32px;
+	height: 32px;
+	float: right;
+}
+
+.batiment-description {
+	background-color: #ccc;
+	min-height: 20px;
+	padding: 5px;
 }

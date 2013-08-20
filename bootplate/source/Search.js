@@ -18,7 +18,10 @@ enyo.kind({
 	setSearch: function(batiments) {
 		this.batiments = batiments;
 
-		this.$.list.setCount(this.batiments.length);
+		var len = 0;
+		for (var i in batiments) { len++; }
+
+		this.$.list.setCount(len);
 		this.$.list.reset();
 	},
 	setupList: function(inSender, inEvent) {

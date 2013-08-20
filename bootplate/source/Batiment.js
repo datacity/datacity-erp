@@ -1,33 +1,28 @@
 enyo.kind({
 	name: "BatimentPanel",
-	style: "",
 	components: [
-		{kind: "FittableRows", components: [
-			{kind: "Scroller", classes: "enyo-fit", components: [
+		{kind: "FittableRows", classes: "enyo-fit", components: [
+			{kind: "Scroller", fit: true, components: [
 				{kind: "Image", name: "thumbnail", classes: "batiment-thumbnail"},
-				{classes: "batiment-border", components: [
+				{kind: "FittableRows", classes: "batiment-border", components: [
 					{name: "title", classes: "batiment-title"},
-					{kind: "Image", name: "favButton", ontap: "callFav", classes: "content-fav"},
+					{name: "description", classes: "batiment-description"},
 					{classes: "content-description", components: [
-						{content: "Informations", classes: "content-second-title"},
-						{kind: "FittableColumns", name: "allContent", components: [
-							{name: "description"},
-							{name: "category"},
-							{name: "adress"},
-							{name: "phoneName"},
-							{name: "phone", ontap: "callNumber", style: "color:blue; text-align : right;"},
-							{name: "websiteName"},
-							{name: "website", ontap: "openBrowser", style: "color:blue; text-align : right;"},
-							{name: "mailName"},
-							{name: "mail", ontap: "sendMail", style: "color:blue; text-align : right;"}
-						]},
-						{content: "Options", name: "option", classes: "content-second-title"},
-						{kind: "enyo.Button", name: "mapButton", content: "Afficher sur la carte", ontap: "callMap", classes: "content-button"}
+						{name: "category"},
+						{name: "adress"},
+						{name: "phoneName"},
+						{name: "phone", ontap: "callNumber"},
+						{name: "websiteName"},
+						{name: "website", ontap: "openBrowser"},
+						{name: "mailName"},
+						{name: "mail", ontap: "sendMail"}
 					]}
 				]}
 			]},
 			{kind: "FittableColumns", style: "height: 48px;", classes: "toolbar", components: [
-				{kind: "Button", content:"Retour", ontap: "backDetail"}
+				{kind: "Button", content:"Retour", ontap: "backDetail"},
+				{kind: "enyo.Button", name: "mapButton", content: "Carte", ontap: "callMap", classes: "content-button"},
+				{kind: "Image", name: "favButton", ontap: "callFav", classes: "batiment-favorite"}
 			]}
 		]}
 	],
@@ -36,69 +31,13 @@ enyo.kind({
 	},
 	updateView: function(batiment) {
 		this.batiment = batiment;
+		
 		console.log(batiment);
 		this.$.title.setContent(this.batiment.name);
 		this.$.thumbnail.setSrc("http://maps.googleapis.com/maps/api/streetview?size=640x400&location=" + this.batiment.adress + "&sensor=true&key=AIzaSyBLceRYUnyY1YYga67bGrBV5KwwYiZGSTY");
-		if ( !(enyo.$.app.$.favorites.isFavorite(this.batiment.id)) )
-			this.$.favButton.setSrc("assets/favoff.png");
-		else
-			this.$.favButton.setSrc("assets/favon.png");
-		
-		if (this.batiment.description == "" || this.batiment.description == null)
-			this.$.description.setContent("");//Pas de description.");
-		else
-			this.$.description.setContent(this.batiment.description);
-		
-		this.$.category.setContent(this.batiment.categorie);
-		
-		if (this.batiment.adress == "" || this.batiment.adress == null)
-			this.$.adress.setContent("");//Pas d'adresse.");
-		else
-			this.$.adress.setContent("Adresse : " + this.batiment.adress);
-		
-		if (this.batiment.phone == "" || this.batiment.phone == null)
-			{
-				this.$.phoneName.setContent("");
-				this.$.phone.setContent("");//Pas de téléphone.");
-			}
-		else
-			{
-				this.$.phoneName.setContent("Téléphone : ");
-				this.$.phone.setContent(this.batiment.phone);
-			}
-		
-		if (this.batiment.website == "" || this.batiment.website == null)
-			{
-				this.$.websiteName.setContent("");
-				this.$.website.setContent("");//Pas de site internet.");
-			}
-		else
-			{
-				this.$.websiteName.setContent("Site internet : ");
-				this.$.website.setContent(this.batiment.website);
-			}
-		
-		if (this.batiment.email == "" || this.batiment.email == null)
-			{
-				this.$.mailName.setContent("");
-				this.$.mail.setContent("");//Pas d'adresse mail.");
-			}
-		else
-			{
-				this.$.mailName.setContent("Email : ");
-				this.$.mail.setContent(this.batiment.email);
-			}
-		
-		if (this.batiment.longitude == "" || this.batiment.longitude == null || this.batiment.longitude == 0)
-			{
-				this.$.mapButton.hide();
-				this.$.option.hide();
-			}
-		else
-			{
-				this.$.mapButton.show();
-				this.$.option.show();
-			}
+		this.$.favButton.setSrc(enyo.$.app.$.favorites.isFavorite(this.batiment.id) ? "assets/favon.png" : "assets/favoff.png");
+		this.$.description.setContent(this.batiment.description);
+			
 	  },
 	callNumber: function() {
 		window.open('tel://' + this.batiment.phone);
