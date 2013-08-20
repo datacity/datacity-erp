@@ -8,7 +8,7 @@ enyo.kind({
 //				{style: "width: 100%; height: 200px; background-color: orange;"},
 				{kind: "Image", name: "thumbnail", classes: "content-thumbnail"},
 				{name: "title", classes: "content-title"},
-				{tag: "br"},
+				{kind: "Image", name: "favButton", ontap: "callFav", classes: "content-fav"},
 				{kind: "FittableRows", classes: "content-description", components: [
 					{content: "Informations", classes: "content-second-title"},
 					{tag: "br"},
@@ -29,11 +29,9 @@ enyo.kind({
 					     {name: "mail", ontap: "sendMail", style: "color:blue; text-align : right;"}
 					]},
 					{tag: "br"},
-					{content: "Options", classes: "content-second-title"},
+					{content: "Options", name: "option", classes: "content-second-title"},
 					{tag: "br"},
-					{kind: "enyo.Button", name: "mapButton", content: "Afficher sur la carte", ontap: "callMap", classes: "content-button"},
-					{tag: "br"},
-					{kind: "enyo.Button", content: "Ajouter en favoris", ontap: "callFav", classes: "content-button"}
+					{kind: "enyo.Button", name: "mapButton", content: "Afficher sur la carte", ontap: "callMap", classes: "content-button"}
 			     ]}
 		]}
 	],
@@ -45,6 +43,10 @@ enyo.kind({
 		console.log(batiment);
 		this.$.title.setContent(this.batiment.name);
 		this.$.thumbnail.setSrc("http://maps.googleapis.com/maps/api/streetview?size=640x400&location=" + this.batiment.adress + "&sensor=true&key=AIzaSyBLceRYUnyY1YYga67bGrBV5KwwYiZGSTY");
+		if ( !(enyo.$.app.$.favorites.isFavorite(this.batiment.id)) )
+			this.$.favButton.setSrc("assets/favoff.png");
+		else
+			this.$.favButton.setSrc("assets/favon.png");
 		
 		if (this.batiment.description == "" || this.batiment.description == null)
 			this.$.description.setContent("");//Pas de description.");
@@ -92,9 +94,15 @@ enyo.kind({
 			}
 		
 		if (this.batiment.longitude == "" || this.batiment.longitude == null || this.batiment.longitude == 0)
-			this.$.mapButton.hide();
+			{
+				this.$.mapButton.hide();
+				this.$.option.hide();
+			}
 		else
-			this.$.mapButton.show();
+			{
+				this.$.mapButton.show();
+				this.$.option.show();
+			}
 	  },
 	callNumber: function() {
 		window.open('tel://' + this.batiment.phone);
@@ -112,8 +120,14 @@ enyo.kind({
 	},
 	callFav: function() {
 		if ( !(enyo.$.app.$.favorites.isFavorite(this.batiment.id)) )
+		{
 			enyo.$.app.$.favorites.add(this.batiment.id);
+			this.$.favButton.setSrc("assets/favon.png");
+		}
 		else
+		{
 			enyo.$.app.$.favorites.remove(this.batiment.id);
+			this.$.favButton.setSrc("assets/favoff.png");
+		}
 	}
 });

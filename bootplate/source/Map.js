@@ -4,12 +4,18 @@ enyo.kind({
 		{kind: "FittableRows", classes: "enyo-fit", components: [
 			{kind: "Map", name: "map", layer: "cloudmade", classes: "enyo-fit", bingCredentials: "AqwmKr40FdqD4Ntpo_ik3UOKXqG4uT5niPKJDhXkdNJhDqvwyscuJtWhZ72QVWAI", style: "height: 100%;", onLoaded: "setMap"},
 			{kind: "FittableColumns", classes: "map-content", components: [
-				{kind: "Button", content: "+", classes: "map-button", ontap: "btnZoomIn"},
+				{kind: "Button", classes: "map-button", ontap: "btnZoomIn", components: [
+                   {kind: "Image", src: "assets/plus.svg", style: "width: 50%;"}                                                                                 
+                ]},
 				{fit: true},
-				{kind: "Button", classes: "map-button", content: "G", ontap: "btnGeoloc"},
+				{kind: "Button", classes: "map-button", ontap: "btnGeoloc", components: [
+                   {kind: "Image", src: "assets/location.svg", style: "width: 90%;"}
+                ]}
 			]},
 			{kind: "FittableColumns", classes: "map-content", style: "padding-top: 0;", components: [
-				{kind: "Button", content: "-", classes: "map-button", ontap: "btnZoomOut"},
+				{kind: "Button", classes: "map-button", ontap: "btnZoomOut", components: [
+                   {kind: "Image", src: "assets/minus.svg", style: "width: 50%;"}                                                                                 
+                ]}
 			]},
 			// {fit: true},
 			// {kind: "FittableColumns", classes: "map-content", components: [

@@ -80,3 +80,10 @@
 	-webkit-border-radius: 				.6em;
 	border-radius: 						.6em;
 }
+
+.content-fav {
+	display: block;
+	margin: 0 auto; 
+	width: 13%;
+	height: 13%;
+}
