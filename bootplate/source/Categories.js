@@ -15,7 +15,7 @@ enyo.kind({
 			{kind: "FittableRows", classes: "enyo-fit", components: [
 				{name: "title", classes: "categories-title"},
 				{kind: "List", name: "buildingList", fit: true, onSetupItem: "setupBuilding", components: [
-					{kind: "onyx.Item", ontap: "buildingListTapped", classes: "panel-list-item", components: [
+					{ontap: "buildingListTapped", classes: "panel-list-item", components: [
 						{name: "panelbuildingcontent"}
 					]}
 				]},

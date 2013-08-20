@@ -1,38 +1,34 @@
 enyo.kind({
 	name: "BatimentPanel",
-	classes: "",
-	style: "overflow-y: scroll;",
+	style: "",
 	components: [
-		{kind: "Scroller", components: [
-			// {kind: "FittableRows", components: [
-//				{style: "width: 100%; height: 200px; background-color: orange;"},
-				{kind: "Image", name: "thumbnail", classes: "content-thumbnail"},
-				{name: "title", classes: "content-title"},
-				{kind: "Image", name: "favButton", ontap: "callFav", classes: "content-fav"},
-				{kind: "FittableRows", classes: "content-description", components: [
-					{content: "Informations", classes: "content-second-title"},
-					{tag: "br"},
-					{kind: "FittableColumns", name: "allContent", components: [
-					     {name: "description"},
-					    // {tag: "br"},
-					     {name: "category"},
-					     {tag: "br"},
-					     {name: "adress"},
-					     {tag: "br"},
-					     {name: "phoneName"},
-					     {name: "phone", ontap: "callNumber", style: "color:blue; text-align : right;"},
-					     {tag: "br"},
-					     {name: "websiteName"},
-					     {name: "website", ontap: "openBrowser", style: "color:blue; text-align : right;"},
-					     {tag: "br"},
-					     {name: "mailName"},
-					     {name: "mail", ontap: "sendMail", style: "color:blue; text-align : right;"}
-					]},
-					{tag: "br"},
-					{content: "Options", name: "option", classes: "content-second-title"},
-					{tag: "br"},
-					{kind: "enyo.Button", name: "mapButton", content: "Afficher sur la carte", ontap: "callMap", classes: "content-button"}
-			     ]}
+		{kind: "FittableRows", components: [
+			{kind: "Scroller", classes: "enyo-fit", components: [
+				{kind: "Image", name: "thumbnail", classes: "batiment-thumbnail"},
+				{classes: "batiment-border", components: [
+					{name: "title", classes: "batiment-title"},
+					{kind: "Image", name: "favButton", ontap: "callFav", classes: "content-fav"},
+					{classes: "content-description", components: [
+						{content: "Informations", classes: "content-second-title"},
+						{kind: "FittableColumns", name: "allContent", components: [
+							{name: "description"},
+							{name: "category"},
+							{name: "adress"},
+							{name: "phoneName"},
+							{name: "phone", ontap: "callNumber", style: "color:blue; text-align : right;"},
+							{name: "websiteName"},
+							{name: "website", ontap: "openBrowser", style: "color:blue; text-align : right;"},
+							{name: "mailName"},
+							{name: "mail", ontap: "sendMail", style: "color:blue; text-align : right;"}
+						]},
+						{content: "Options", name: "option", classes: "content-second-title"},
+						{kind: "enyo.Button", name: "mapButton", content: "Afficher sur la carte", ontap: "callMap", classes: "content-button"}
+					]}
+				]}
+			]},
+			{kind: "FittableColumns", style: "height: 48px;", classes: "toolbar", components: [
+				{kind: "Button", content:"Retour", ontap: "backDetail"}
+			]}
 		]}
 	],
 	create: function() {
@@ -128,6 +124,19 @@ enyo.kind({
 		{
 			enyo.$.app.$.favorites.remove(this.batiment.id);
 			this.$.favButton.setSrc("assets/favoff.png");
+		}
+	},
+	setBackBatiment: function(name) {
+		this.currentPanelBatiment = name;
+	},
+	backDetail: function(inSender, inEvent) {
+		if (this.currentPanelBatiment === "search") {
+			enyo.$.app.$.contentPanels.setIndex(3);
+		}
+		else if (this.currentPanelBatiment === "favorites") {
+			enyo.$.app.$.contentPanels.setIndex(2);
+		} else {
+			enyo.$.app.$.contentPanels.setIndex(0);
 		}
 	}
 });

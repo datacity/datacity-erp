@@ -18,15 +18,6 @@ enyo.kind({
 	setSearch: function(batiments) {
 		this.batiments = batiments;
 
-		this.batiments.sort(function(a, b) {
-			if (a.name < b.name)
-				return -1;
-			else if (a.name > b.name)
-				return 1;
-			else
-				return 0; 
-		});
-
 		this.$.list.setCount(this.batiments.length);
 		this.$.list.reset();
 	},

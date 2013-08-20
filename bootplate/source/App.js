@@ -22,12 +22,7 @@ enyo.kind({
 					{kind: "FavoritesPanel", name: "favorites"},
 					{kind: "SearchPanel", name: "search"},
 					{kind: "AboutPanel", name: "about"},
-					{kind: "FittableRows", components: [
-						{kind: "BatimentPanel", name: "batimentView", fit: true},
-						{kind: "FittableColumns", classes: "toolbar", components: [
-							{kind: "Button", content:"Retour", ontap: "backDetail"}
-						]}
-					]}
+					{kind: "BatimentPanel", name: "batimentView"}
 				]}
 			]}
     	]}
@@ -117,7 +112,7 @@ enyo.kind({
 				add: function(batiment) {
 					var catName = batiment.categorie.trim().toLowerCase();
 					var newName = genericCategories[catName];
-					if (newName == null || newName == "")
+					if (!newName || newName == "")
 						newName = "Autre";
 					
 					var category = getCategory(newName);
@@ -182,6 +177,17 @@ enyo.kind({
 
 		if (data.status == "ok") {
 			for (var i = 0, length = data.response.length; i < length; i++) {
+				data.response[i].name = data.response[i].name.trim();
+			}
+			data.response.sort(function(a, b) {
+				if (a.name < b.name)
+					return -1;
+				else if (a.name > b.name)
+					return 1;
+				else
+					return 0; 
+			});
+			for (var i = 0, length = data.response.length; i < length; i++) {
 				enyo.batiments.add(data.response[i]);
 			}
 			enyo.batiments.sortCategories();
@@ -195,51 +201,38 @@ enyo.kind({
 	},
 	processData: function() {
 		var all = enyo.batiments.getAllBatiments();
-		for (var id in all) {
-			var batiment = all[id];
-			if (batiment.latitude == 0 || batiment.longitude == 0) {
-				var adress = batiment.adress.split(" ");
-				for (var i in adress) {
-					if (adress[i].length == 5 && adress[i].indexOf("34", 0) != -1) {
-						adress.splice(i, 1);
-					}
-				}
-				(function(map, batiment) {
-					var ajax = new enyo.Ajax({
-						url: "http://nominatim.openstreetmap.org/search?q=" + adress.join(" ").replace(/ /g, "+") + "&format=json"
-					});
-					ajax.go();
-					ajax.response(function(inSender, inResponse) {
-						if (inResponse.length > 0) {
-							batiment.latitude = inResponse[0].lat;
-							batiment.longitude = inResponse[0].lon;
-							localStorage.batiments = JSON.stringify(enyo.batiments.serialize());
-							console.log("Géoloc trouvée : " + batiment.name);
-							map.addBatiments([batiment]);
-						} else {
-							console.log("ERREUR - Géoloc non trouvée : " + batiment.name);
-						}
-					});					
-				})(this.$.map, batiment);
-			}
-		}
+		// for (var id in all) {
+		// 	var batiment = all[id];
+		// 	if (batiment.latitude == 0 || batiment.longitude == 0) {
+		// 		var adress = batiment.adress.split(" ");
+		// 		for (var i in adress) {
+		// 			if (adress[i].length == 5 && adress[i].indexOf("34", 0) != -1) {
+		// 				adress.splice(i, 1);
+		// 			}
+		// 		}
+		// 		(function(map, batiment) {
+		// 			var ajax = new enyo.Ajax({
+		// 				url: "http://nominatim.openstreetmap.org/search?q=" + adress.join(" ").replace(/ /g, "+") + "&format=json"
+		// 			});
+		// 			ajax.go();
+		// 			ajax.response(function(inSender, inResponse) {
+		// 				if (inResponse.length > 0) {
+		// 					batiment.latitude = inResponse[0].lat;
+		// 					batiment.longitude = inResponse[0].lon;
+		// 					localStorage.batiments = JSON.stringify(enyo.batiments.serialize());
+		// 					console.log("Géoloc trouvée : " + batiment.name);
+		// 					map.addBatiments([batiment]);
+		// 				} else {
+		// 					console.log("ERREUR - Géoloc non trouvée : " + batiment.name);
+		// 				}
+		// 			});					
+		// 		})(this.$.map, batiment);
+		// 	}
+		// }
 
 		this.$.favorites.setFavorites();
 		this.$.categories.setData();
 		this.$.map.addBatiments(all);
 		this.$.search.setSearch(all);
-	},
-	setBackBatiment: function(name) {
-		this.currentPanelBatiment = name;
-	},
-	backDetail: function(inSender, inEvent) {
-		if (this.currentPanelBatiment === "search") {
-			this.$.contentPanels.setIndex(3);
-		}
-		else if (this.currentPanelBatiment === "favorites") {
-			this.$.contentPanels.setIndex(2);
-		} else {
-			this.$.contentPanels.setIndex(0);
-		}
 	}
 });

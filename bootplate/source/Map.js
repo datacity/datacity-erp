@@ -29,8 +29,8 @@ enyo.kind({
 		
 	},
 	setMap: function() {
-		// var bounds = new L.LatLngBounds(new L.LatLng(43.66, 3.78), new L.LatLng(43.55, 3.97));
-		// this.$.map.setMaxBounds(bounds);
+		var bounds = new L.LatLngBounds(new L.LatLng(43.66, 3.78), new L.LatLng(43.55, 3.97));
+		this.$.map.setMaxBounds(bounds);
 
 		this.poiGroup = new L.LayerGroup();
 		this.$.map.addLayer(this.poiGroup);
@@ -82,23 +82,19 @@ enyo.kind({
 	    map.locate({ setView: true, maxZoom: 16 });
 	},
 	addBatiments: function(batiments) {
-		for (var i = 0, length = batiments.length; i < length; i++) {
+		for (var i in batiments) {
 			if (batiments[i].latitude > 0 && batiments[i].longitude > 0) {
-
-			var marker = new L.Marker(new L.LatLng(batiments[i].latitude, batiments[i].longitude), {
-				icon: enyo.batiments.getGenericCategory(batiments[i].categorie.trim().toLowerCase()) in this.icons ? this.icons[enyo.batiments.getGenericCategory(batiments[i].categorie.trim().toLowerCase())] : this.icons["Autre"]
-			});
-			this.poiGroup.addLayer(marker);
-			(function(batiment, panelName) {
-				marker.on('click', function(e) {
-					enyo.$.app.$.batimentView.updateView(batiment);
-					enyo.$.app.setBackBatiment(panelName);
-					enyo.$.app.$.contentPanels.setIndex(5);
+				var marker = new L.Marker(new L.LatLng(batiments[i].latitude, batiments[i].longitude), {
+					icon: enyo.batiments.getGenericCategory(batiments[i].categorie.trim().toLowerCase()) in this.icons ? this.icons[enyo.batiments.getGenericCategory(batiments[i].categorie.trim().toLowerCase())] : this.icons["Autre"]
 				});
-			})(batiments[i], this.name);
-
-
-
+				this.poiGroup.addLayer(marker);
+				(function(batiment, panelName) {
+					marker.on('click', function(e) {
+						enyo.$.app.$.batimentView.updateView(batiment);
+						enyo.$.app.$.batimentView.setBackBatiment(panelName);
+						enyo.$.app.$.contentPanels.setIndex(5);
+					});
+				})(batiments[i], this.name);
 			}
 		}
 	},
