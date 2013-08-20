@@ -89,12 +89,13 @@ enyo.kind({
 					"services municipaux": "Administration",
 					"sociétés d'hlm": "Social"
 			};
+			var count = 0;
 
 			if (localStorage.batiments) {
 				var saved = JSON.parse(localStorage.batiments);
 			}
 			var categories = saved ? saved.categories : [];
-			var batiments = saved ? saved.batiments : [];
+			var batiments = saved ? saved.batiments : {};
 
 			var getCategory = function(category) {
 				for (var item in categories) {
@@ -114,29 +115,26 @@ enyo.kind({
 
 			return {
 				add: function(batiment) {
-					var id = batiments.push(batiment); //- 1;
 					var catName = batiment.categorie.trim().toLowerCase();
-					console.log("IDIDIDIDID    " + id + "    NAME    " + batiment.name);
 					var newName = genericCategories[catName];
 					if (newName == null || newName == "")
 						newName = "Autre";
-					// = (genericCategories[catName] ? genericCategories[catName] : "Autre");
 					
 					var category = getCategory(newName);
-					
-					console.log("TEST 1 :  " + catName + "   test 2 :  " + newName + "  cat : " + category);
 
 					batiment.name = batiment.name.trim();
-					batiment.id = id;
+					batiment.id = count;
+					batiments[count] = batiment;
 					
 					if (!category) {
 						categories.push({
 							name: newName,
-							batiments: [id]
+							batiments: [count]
 						});
 					} else {
-						category.batiments.push(id);
+						category.batiments.push(count);
 					}
+					count++;
 				},
 				getCategories: function() {
 					return categories;
@@ -163,11 +161,6 @@ enyo.kind({
 				"serialize": serialize
 			};
 		}();
-
-
-		// this.$.contentPanels.setIndex(3);
-		// this.$.categories.$.categoriesPanels.setIndex(2);
-
 	},
 	getData: function() {
 		if (!localStorage.batiments) {
