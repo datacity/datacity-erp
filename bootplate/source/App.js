@@ -3,7 +3,7 @@ enyo.kind({
 	kind: "FittableRows",
 	classes: "enyo-unselectable",
 	components:[
-		{kind: "WebService", name:"data", url: "test.json", onResponse:"processResponse", onError: "processError"},
+		{kind: "WebService", name:"data", url: "servicePublic.json", onResponse:"processResponse", onError: "processError"},
 		{kind: "Panels", name: "mainPanels", classes: "panels panel-border enyo-fit", index: 1, narrowFit: false, realtimeFit: false, arrangerKind: "CollapsingArranger", components: [
 			{kind: "MenuPanel", name: "menu"},
 			{kind: "FittableRows", style: "min-width: 320px;", components: [
