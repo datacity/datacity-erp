@@ -1,6 +1,6 @@
 .batiment-thumbnail
 {
-	width: 320px;
+	width: 100%;
 	height: 200px;
 }
 
@@ -22,5 +22,25 @@
 .batiment-description {
 	background-color: #ccc;
 	min-height: 20px;
-	padding: 5px;
+}
+
+.batiment-content-container {
+	margin-top: 10px;
+}
+
+.batiment-content-container > * {
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #aaa;
+}
+
+.batiment-description-label {
+	padding-right: 5px;
+	color: #1879cd;
+	font-size: 15px;
+	text-transform: uppercase;
+}
+
+.batiment-description-content {
+	text-align: right;
 }

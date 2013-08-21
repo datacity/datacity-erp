@@ -29,8 +29,8 @@ enyo.kind({
 		
 	},
 	setMap: function() {
-		var bounds = new L.LatLngBounds(new L.LatLng(43.66, 3.78), new L.LatLng(43.55, 3.97));
-		this.$.map.setMaxBounds(bounds);
+		this.bounds = new L.LatLngBounds(new L.LatLng(43.66, 3.78), new L.LatLng(43.55, 3.97));
+		this.$.map.setMaxBounds(this.bounds);
 
 		this.poiGroup = new L.LayerGroup();
 		this.$.map.addLayer(this.poiGroup);
@@ -67,7 +67,11 @@ enyo.kind({
 	},
 	btnGeoloc: function () {
 	    var map = this.$.map.getMap();
+	    var bounds = this.bounds;
 	    map.on("locationfound", function (e) {
+	    	if (bounds.contains(e.latlng) == false) {
+	    		return false;
+	    	}
 	        if (!this.geolocCircle) {
 	            this.geolocCircle = L.circle(e.latlng, e.accuracy / 2, {
 	                color: 'red',
