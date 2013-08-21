@@ -5,16 +5,16 @@ enyo.kind({
 			{kind: "Map", name: "map", layer: "cloudmade", classes: "enyo-fit", bingCredentials: "AqwmKr40FdqD4Ntpo_ik3UOKXqG4uT5niPKJDhXkdNJhDqvwyscuJtWhZ72QVWAI", style: "height: 100%;", onLoaded: "setMap"},
 			{kind: "FittableColumns", classes: "map-content", components: [
 				{kind: "Button", classes: "map-button", ontap: "btnZoomIn", components: [
-                   {kind: "Image", src: "assets/plus.svg", style: "width: 50%;"}                                                                                 
+                   {kind: "Image", src: "assets/plus.svg"}                                                                                 
                 ]},
 				{fit: true},
 				{kind: "Button", classes: "map-button", ontap: "btnGeoloc", components: [
-                   {kind: "Image", src: "assets/location.svg", style: "width: 90%;"}
+                   {kind: "Image", src: "assets/location.svg"}
                 ]}
 			]},
 			{kind: "FittableColumns", classes: "map-content", style: "padding-top: 0;", components: [
 				{kind: "Button", classes: "map-button", ontap: "btnZoomOut", components: [
-                   {kind: "Image", src: "assets/minus.svg", style: "width: 50%;"}                                                                                 
+                   {kind: "Image", src: "assets/minus.svg"}                                                                                 
                 ]}
 			]},
 			// {fit: true},

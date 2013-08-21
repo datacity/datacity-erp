@@ -7,10 +7,15 @@
 }
 
 .map-button {
-	background-color: rgba(30, 30, 30, 0.3);
-	border: 2px solid #666;
-	width: 35px;
+	background-color: rgba(30, 30, 30, 0.2);
+	border: 2px solid transparent;
+	border-radius: 2px;
+	/*width: 35px;*/
 	padding: 2px;
-	line-height: 30px;
+	/*height: 30px;*/
+}
+
+.map-button img {
+	width: 30px;
 	height: 30px;
 }

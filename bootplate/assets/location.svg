@@ -1,16 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="75" height="75" xmlns="http://www.w3.org/2000/svg">
-
- <metadata id="metadata12296">image/svg+xml</metadata>
- <g>
-  <title>background</title>
-  <rect fill="none" id="canvas_background" height="77" width="77" y="-1" x="-1"/>
- </g>
- <g>
-  <title>Layer 1</title>
-  <g id="layer1">
-   <path fill="black" fill-rule="nonzero" stroke-width="6.222222" stroke-linejoin="round" marker-start="none" marker-mid="none" marker-end="none" stroke-miterlimit="4" stroke-dashoffset="0" id="path3671" d="m50,37.492157c0,6.715961 -5.376038,12.166668 -12,12.166668c-6.624023,0 -12.000063,-5.450706 -12.000063,-12.166668c0,-6.716022 5.37604,-12.166727 12.000063,-12.166727c6.623962,0 12,5.450705 12,12.166727z"/>
-   <path fill="black" fill-rule="nonzero" stroke-width="6.999999" stroke-linejoin="round" stroke-miterlimit="4" stroke-dashoffset="0" id="path5561" d="m37.999935,1.006888c-19.828245,0 -36,16.39636 -36,36.499997c0,20.103703 16.171755,36.500057 36,36.500057c19.828312,0 36.000065,-16.396355 36.000065,-36.500057c0,-20.103638 -16.171753,-36.499997 -36.000065,-36.499997zm0,8.111111c15.49976,0 28.000065,12.673858 28.000065,28.388886c0,15.715031 -12.500305,28.38895 -28.000065,28.38895c-15.499756,0 -28,-12.67392 -28,-28.38895c0,-15.715029 12.500244,-28.388886 28,-28.388886z"/>
-  </g>
- </g>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   width="30"
+   height="30">
+  <style type="text/css" media="screen">
+    <![CDATA[
+      .color-stroke {
+        stroke: #2966B8;
+      }
+      .color-fill {
+        fill: #2966B8;
+      }
+    ]]>
+  </style>
+	<g>
+		<title>Localisation</title>
+		<circle r="12" cy="15" cx="15" stroke-width="3" fill="none" class="color-stroke" />
+		<circle r="5" cy="15" cx="15" stroke-width="9" stroke="none" class="color-fill" />
+	</g>
 </svg>
