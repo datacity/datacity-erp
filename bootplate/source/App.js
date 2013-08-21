@@ -86,11 +86,13 @@ enyo.kind({
 			};
 			var count = 0;
 
-			if (localStorage.batiments) {
-				var saved = JSON.parse(localStorage.batiments);
-			}
-			var categories = saved ? saved.categories : [];
-			var batiments = saved ? saved.batiments : {};
+			// if (localStorage.batiments) {
+				// var saved = JSON.parse(localStorage.batiments);
+			// }
+			// var categories = saved ? saved.categories : [];
+			// var batiments = saved ? saved.batiments : {};
+			var categories = [];
+			var batiments = {};
 
 			var getCategory = function(category) {
 				for (var item in categories) {
@@ -158,11 +160,11 @@ enyo.kind({
 		}();
 	},
 	getData: function() {
-		if (!localStorage.batiments) {
+		// if (!localStorage.batiments) {
 			this.$.data.send();
-		} else {
-			this.processData();
-		}		
+		// } else {
+			// this.processData();
+		// }	
 	},
 	gotoMenu: function(inSender, inEvent) {
 		this.$.mainPanels.setIndex(this.$.mainPanels.index == 1 ? 0 : 1);
@@ -191,8 +193,8 @@ enyo.kind({
 				enyo.batiments.add(data.response[i]);
 			}
 			enyo.batiments.sortCategories();
-			console.log(enyo.batiments.serialize());
-			localStorage.batiments = JSON.stringify(enyo.batiments.serialize());
+			// console.log(enyo.batiments.serialize());
+			// localStorage.batiments = JSON.stringify(enyo.batiments.serialize());
 			this.processData();
 		}
 	},
@@ -201,34 +203,34 @@ enyo.kind({
 	},
 	processData: function() {
 		var all = enyo.batiments.getAllBatiments();
-		// for (var id in all) {
-		// 	var batiment = all[id];
-		// 	if (batiment.latitude == 0 || batiment.longitude == 0) {
-		// 		var adress = batiment.adress.split(" ");
-		// 		for (var i in adress) {
-		// 			if (adress[i].length == 5 && adress[i].indexOf("34", 0) != -1) {
-		// 				adress.splice(i, 1);
-		// 			}
-		// 		}
-		// 		(function(map, batiment) {
-		// 			var ajax = new enyo.Ajax({
-		// 				url: "http://nominatim.openstreetmap.org/search?q=" + adress.join(" ").replace(/ /g, "+") + "&format=json"
-		// 			});
-		// 			ajax.go();
-		// 			ajax.response(function(inSender, inResponse) {
-		// 				if (inResponse.length > 0) {
-		// 					batiment.latitude = inResponse[0].lat;
-		// 					batiment.longitude = inResponse[0].lon;
-		// 					localStorage.batiments = JSON.stringify(enyo.batiments.serialize());
-		// 					console.log("Géoloc trouvée : " + batiment.name);
-		// 					map.addBatiments([batiment]);
-		// 				} else {
-		// 					console.log("ERREUR - Géoloc non trouvée : " + batiment.name);
-		// 				}
-		// 			});					
-		// 		})(this.$.map, batiment);
-		// 	}
-		// }
+		for (var id in all) {
+			var batiment = all[id];
+			if (batiment.latitude == 0 || batiment.longitude == 0) {
+				var adress = batiment.adress.split(" ");
+				for (var i in adress) {
+					if (adress[i].length == 5 && adress[i].indexOf("34", 0) != -1) {
+						adress.splice(i, 1);
+					}
+				}
+				(function(map, batiment) {
+					var ajax = new enyo.Ajax({
+						url: "http://nominatim.openstreetmap.org/search?q=" + adress.join(" ").replace(/ /g, "+") + "&format=json"
+					});
+					ajax.go();
+					ajax.response(function(inSender, inResponse) {
+						if (inResponse.length > 0) {
+							batiment.latitude = inResponse[0].lat;
+							batiment.longitude = inResponse[0].lon;
+							// localStorage.batiments = JSON.stringify(enyo.batiments.serialize());
+							// console.log("Géoloc trouvée : " + batiment.name);
+							map.addBatiments([batiment]);
+						} else {
+							// console.log("ERREUR - Géoloc non trouvée : " + batiment.name);
+						}
+					});					
+				})(this.$.map, batiment);
+			}
+		}
 
 		this.$.favorites.setFavorites();
 		this.$.categories.setData();
