@@ -8,11 +8,11 @@ enyo.kind({
 				{classes: "about-title", content: "Contact"},
 				{classes: "about-content", components: [
                     {kind: "FittableColumns", classes: "about-contact-mail", components: [
-						{kind: "Image", classes: "about-contact-thumbnail", src: "assets/mail.png"},
+						//{kind: "Image", classes: "about-contact-thumbnail", src: "assets/mail.png"},
 						{fit: true, content: "contact@datacity.fr", ontap: "contactMail", classes: "about-contact-content"}
 					]},
 					{kind: "FittableColumns", classes: "about-contact-twitter", components: [
-   						{kind: "Image", classes: "about-contact-thumbnail", src: "assets/twitter-icon.png"},
+   						//{kind: "Image", classes: "about-contact-thumbnail", src: "assets/twitter-icon.png"},
    						{fit: true, content: "@DataCity_fr", ontap: "openTwitterPage", classes: "about-contact-content"}
    					]}
 				]},
