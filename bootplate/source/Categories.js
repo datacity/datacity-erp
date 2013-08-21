@@ -74,6 +74,7 @@ enyo.kind({
 		var item = this.batiments[i];
 
 		this.$.batimentView.updateView(item);
+		this.$.batimentView.setBackBatiment(this.name);
 		this.$.categoriesPanels.next();
 	},
 	setupBuilding: function(inSender, inEvent) {

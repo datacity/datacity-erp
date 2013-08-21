@@ -100,6 +100,9 @@ enyo.kind({
 		}
 		else if (this.currentPanelBatiment === "favorites") {
 			enyo.$.app.$.contentPanels.setIndex(2);
+		}
+		else if (this.currentPanelBatiment === "categories") {
+			enyo.$.app.$.categories.$.categoriesPanels.previous();
 		} else {
 			enyo.$.app.$.contentPanels.setIndex(0);
 		}
