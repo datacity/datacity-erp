@@ -97,14 +97,16 @@ enyo.kind({
 	backDetail: function(inSender, inEvent) {
 		if (this.currentPanelBatiment === "search") {
 			enyo.$.app.$.contentPanels.setIndex(3);
-		}
-		else if (this.currentPanelBatiment === "favorites") {
+			enyo.$.app.$.title.setContent("Rechercher");
+		} else if (this.currentPanelBatiment === "favorites") {
+			enyo.$.app.$.title.setContent("Favoris");
 			enyo.$.app.$.contentPanels.setIndex(2);
-		}
-		else if (this.currentPanelBatiment === "categories") {
+		} else if (this.currentPanelBatiment === "categories") {
+			enyo.$.app.$.title.setContent("Catégories");
 			enyo.$.app.$.categories.$.categoriesPanels.previous();
-		} else {
+		} else if (this.currentPanelBatiment === "map") {
 			enyo.$.app.$.contentPanels.setIndex(0);
+			enyo.$.app.$.title.setContent("Carte");
 		}
 	}
 });

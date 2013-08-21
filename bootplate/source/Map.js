@@ -96,6 +96,7 @@ enyo.kind({
 					marker.on('click', function(e) {
 						enyo.$.app.$.batimentView.updateView(batiment);
 						enyo.$.app.$.batimentView.setBackBatiment(panelName);
+						enyo.$.app.$.title.setContent("Bâtiment");
 						enyo.$.app.$.contentPanels.setIndex(5);
 					});
 				})(batiments[i], this.name);

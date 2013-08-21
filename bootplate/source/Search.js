@@ -72,7 +72,8 @@ enyo.kind({
 	itemTap: function(inSender, inEvent) {
 		var data = this.filter ? this.filtered : this.batiments;
 		enyo.$.app.$.batimentView.updateView(data[inEvent.index]);
-		enyo.$.app.setBackBatiment(this.name);
+		enyo.$.app.$.batimentView.setBackBatiment(this.name);
+		enyo.$.app.$.title.setContent("Bâtiment");
 		enyo.$.app.$.contentPanels.setIndex(5);
 	},
 });

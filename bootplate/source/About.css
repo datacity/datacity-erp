@@ -1,3 +1,7 @@
+.about {
+	overflow-y: auto;
+}
+
 .about-title {
 	font-size: 24px;
 	padding: 10px 10px 5px 10px;
@@ -6,4 +10,33 @@
 
 .about-content {
 	padding: 5px 15px;
+}
+
+.about-dev {
+	text-align: center;
+}
+
+.about-contact-mail {
+	padding-bottom: 2%;
+	border-bottom: 1px solid #aaa;
+}
+
+.about-contact-twitter {
+	padding-top: 2%;
+}
+
+.about-contact-thumbnail {
+	height: 7%;
+	width: 7%;
+}
+
+.about-contact-content {
+	text-align: center;
+}
+
+.about-dev-thumbnail {
+	display: block;
+	margin: 0 auto;
+	height: 35%;
+	width: 35%;
 }

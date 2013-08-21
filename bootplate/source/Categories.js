@@ -47,12 +47,7 @@ enyo.kind({
 		
 		this.batiments = [];
 		for (var id in this.categories[i].batiments) {
-			//console.log("TEESSSSSTT !1   =>  " + this.categories[i].name + "     TEST @@@@2222 ==>    " + enyo.batiments.getBatiment(this.categories[i].batiments[id]).name + "    test 3    " + this.categories[i].batiments[id].name);
-			//var genericCat = enyo.batiments.getGenericCategories();
-			//console.log("TEESSSSSTT !1   =>  " + this.categories[i].name + "     TEST @@@@2222 ==>    " + enyo.batiments.getBatiment(this.categories[i].batiments[id]).categorie + "    test 3    " + genericCat[enyo.batiments.getBatiment(this.categories[i].batiments[id]).categorie.trim().toLowerCase()]);
-
-			//if (genericCat[enyo.batiments.getBatiment(this.categories[i].batiments[id]).categorie.trim().toLowerCase()] === this.categories[i].name)
-				this.batiments.push(enyo.batiments.getBatiment(this.categories[i].batiments[id]));
+			this.batiments.push(enyo.batiments.getBatiment(this.categories[i].batiments[id]));
 		}
 		this.batiments.sort(function(a, b) {
 			if (a.name < b.name)
@@ -75,6 +70,8 @@ enyo.kind({
 
 		this.$.batimentView.updateView(item);
 		this.$.batimentView.setBackBatiment(this.name);
+		enyo.$.app.$.batimentView.setBackBatiment(this.name);
+		enyo.$.app.$.title.setContent("Bâtiment");
 		this.$.categoriesPanels.next();
 	},
 	setupBuilding: function(inSender, inEvent) {
