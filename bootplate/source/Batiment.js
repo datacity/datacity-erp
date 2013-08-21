@@ -30,7 +30,8 @@ enyo.kind({
 			{kind: "FittableColumns", style: "height: 48px;", classes: "toolbar", components: [
 				{kind: "Button", content:"Retour", ontap: "backDetail"},
 				{kind: "enyo.Button", name: "mapButton", content: "Carte", ontap: "callMap", classes: "content-button"},
-				{kind: "Image", name: "favButton", ontap: "callFav", classes: "batiment-favorite"}
+				{fit: true},
+				{kind: "Image", name: "favButton", ontap: "callFav", width: 32, height: 32, classes: "batiment-favorite"}
 			]}
 		]}
 	],
