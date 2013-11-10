@@ -17,11 +17,6 @@ enyo.kind({
                    {kind: "Image", src: "assets/minus.svg"}                                                                                 
                 ]}
 			]},
-			// {fit: true},
-			// {kind: "FittableColumns", classes: "map-content", components: [
-			// 	{kind: "Button", content: "-", classes: "map-button", ontap: "btnZoomOut"},
-			// 	{kind: "Button", content: "+", classes: "map-button", ontap: "btnZoomIn"},
-			// ]}
 		]}
 	],
 	create: function() {

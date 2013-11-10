@@ -193,7 +193,6 @@ enyo.kind({
 				enyo.batiments.add(data.response[i]);
 			}
 			enyo.batiments.sortCategories();
-			// console.log(enyo.batiments.serialize());
 			// localStorage.batiments = JSON.stringify(enyo.batiments.serialize());
 			this.processData();
 		}
