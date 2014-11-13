@@ -9,4 +9,7 @@
 
 .favorites-list-item-button {
 	float: right;
+	font-weight: bolder;
+	padding: 3px 13px;
+	margin: 0 5px;
 }

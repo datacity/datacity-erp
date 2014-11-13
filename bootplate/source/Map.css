@@ -1,9 +1,17 @@
 .map-content {
 	padding: 10px 5px;
+	z-index: 9000;
 }
 
 .map-content .map-button {
 	margin: 5px;
+}
+
+.map-here {
+	z-index: 9000;
+	margin: 5px;
+	width: 30px;
+	width: 24px;
 }
 
 .map-button {

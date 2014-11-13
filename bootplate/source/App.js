@@ -3,17 +3,16 @@ enyo.kind({
 	kind: "FittableRows",
 	classes: "enyo-unselectable",
 	components:[
-		{kind: "WebService", name:"data", url: "servicePublic.json", onResponse:"processResponse", onError: "processError"},
 		{kind: "Panels", name: "mainPanels", classes: "panels panel-border enyo-fit", index: 1, narrowFit: false, realtimeFit: false, arrangerKind: "CollapsingArranger", components: [
 			{kind: "MenuPanel", name: "menu"},
 			{kind: "FittableRows", style: "min-width: 320px;", components: [
 				{kind: "FittableColumns", classes: "app-toolbar", components: [
 					{kind: "Button", classes: "icon", ontap: "gotoMenu", components: [
-						{kind: "Image", src: "assets/menu.svg"}
+						{kind: "Image", src: "assets/menu.png"}
 					]},
 					{name: "title", content: "Carte", classes: "title", fit: true},
 					{kind: "Button", classes: "icon", ontap: "gotoSearch", components: [
-						{kind: "Image", src: "assets/search.svg"}
+						{kind: "Image", src: "assets/search.png"}
 					]},
 				]},
 				{kind: "Panels", name: "contentPanels", arrangerKind: "CardArranger", fit: true, draggable: false, components: [
@@ -29,6 +28,8 @@ enyo.kind({
 	],
 	create: function() {
 		this.inherited(arguments);
+
+		
 
 		enyo.batiments = function() {
 			var genericCategories = {
@@ -86,13 +87,13 @@ enyo.kind({
 			};
 			var count = 0;
 
-			// if (localStorage.batiments) {
-				// var saved = JSON.parse(localStorage.batiments);
-			// }
-			// var categories = saved ? saved.categories : [];
-			// var batiments = saved ? saved.batiments : {};
-			var categories = [];
-			var batiments = {};
+			if (localStorage.batiments) {
+				var saved = JSON.parse(localStorage.batiments);
+			}
+			var categories = saved ? saved.categories : [];
+			var batiments = saved ? saved.batiments : {};
+			// var categories = [];
+			// var batiments = {};
 
 			var getCategory = function(category) {
 				for (var item in categories) {
@@ -160,11 +161,19 @@ enyo.kind({
 		}();
 	},
 	getData: function() {
-		// if (!localStorage.batiments) {
-			this.$.data.send();
-		// } else {
-			// this.processData();
-		// }	
+		if (!localStorage.batiments) {
+			var ajax = new enyo.Ajax({
+		        url: "assets/servicePublic.json",
+		        handleAs: "json"
+		    });
+		    ajax.go();
+		    ajax.response(this, "processResponse");
+		    ajax.error(function(err) {
+		    	alert("Erreur ajax. Impossible de récupérer les batiments");
+		    });
+		} else {
+			this.processData();
+		}	
 	},
 	gotoMenu: function(inSender, inEvent) {
 		this.$.mainPanels.setIndex(this.$.mainPanels.index == 1 ? 0 : 1);
@@ -175,7 +184,7 @@ enyo.kind({
 		this.$.mainPanels.setIndex(1);
 	},
 	processResponse: function(inSender, inEvent) {
-		var data = inEvent.data;
+		var data = inEvent;
 
 		if (data.status == "ok") {
 			for (var i = 0, length = data.response.length; i < length; i++) {
@@ -193,12 +202,9 @@ enyo.kind({
 				enyo.batiments.add(data.response[i]);
 			}
 			enyo.batiments.sortCategories();
-			// localStorage.batiments = JSON.stringify(enyo.batiments.serialize());
+			localStorage.batiments = JSON.stringify(enyo.batiments.serialize());
 			this.processData();
 		}
-	},
-	proccessError: function(inSender, inEvent) {
-		console.log("Erreur ajax. Impossible de récupérer les batiments");
 	},
 	processData: function() {
 		var all = enyo.batiments.getAllBatiments();
@@ -220,7 +226,7 @@ enyo.kind({
 						if (inResponse.length > 0) {
 							batiment.latitude = inResponse[0].lat;
 							batiment.longitude = inResponse[0].lon;
-							// localStorage.batiments = JSON.stringify(enyo.batiments.serialize());
+							localStorage.batiments = JSON.stringify(enyo.batiments.serialize());
 							// console.log("Géoloc trouvée : " + batiment.name);
 							map.addBatiments([batiment]);
 						} else {

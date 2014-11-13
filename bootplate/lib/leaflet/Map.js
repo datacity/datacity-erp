@@ -13,9 +13,7 @@ enyo.kind({
 		latitude: 46.498392,
 		longitude: 2.460938,
 		zoom: 4,
-		layer: "osm",
-		bingMapType: "aerial",
-		bingCredentials: "",
+		layer: "here",
 		options: ""
 	},
 	events: {
@@ -30,20 +28,23 @@ enyo.kind({
 	rendered: function() {
 		this.inherited(arguments);
 
-		var cloudMade = new L.TileLayer("http://{s}.tile.cloudmade.com/78eab727fd024b2a9b889e3236c70394/68943/256/{z}/{x}/{y}.png", {
-			maxZoom: 18 
+		var here = new L.TileLayer("http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/maptile/{mapID}/{variant}/{z}/{x}/{y}/256/png8?app_id={app_id}&app_code={app_code}", {
+			subdomains: '1234',
+			mapID: 'newest',
+			'app_id': 'mSv5MRTJpJWcrO0xVfSJ',
+			'app_code': 'ktNHh_fKvRLbpqlcd-zwjg',
+			base: 'base',
+			variant: 'normal.day',
+			minZoom: 12,
+			maxZoom: 20
 		});
 		var osm = new L.TileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 			maxZoom: 18
 		});
-		var bingLayer = new L.BingLayer(this.bingCredentials, {
-			maxZoom: 20
-		});
 
 		this.mapsLayer = {
-			"cloudmade": cloudMade,
 			"osm": osm,
-			"bing": bingLayer
+			"here": here
 		};
 
 		this.map = new L.Map(this.id, {
@@ -76,6 +77,9 @@ enyo.kind({
 	},
 	setMaxBounds: function(bounds) {
 		this.map.setMaxBounds(bounds);
+	},
+	fitBounds: function(bounds) {
+		this.map.fitBounds(bounds);
 	},
 	invalidateSize: function(animate) {
 		this.map.invalidateSize(animate);

@@ -1,42 +1,14 @@
 .about {
-	overflow: auto;
+	text-align: center;
 }
 
-.about-title {
-	font-size: 24px;
-	padding: 10px 10px 5px 10px;
-	color: #1879cd;
-}
 
 .about-content {
 	padding: 5px 15px;
 }
 
-.about-dev {
+.about-logo {
+	margin: 70px auto 20px auto;
+	height: 150px;
 	text-align: center;
-}
-
-.about-contact-mail {
-	padding-bottom: 10px;
-	border-bottom: 1px solid #aaa;
-}
-
-.about-contact-twitter {
-	padding-top: 2%;
-}
-
-.about-contact-thumbnail {
-	height: 18px;
-	width: 18px;
-}
-
-.about-contact-content {
-	text-align: center;
-}
-
-.about-dev-thumbnail {
-	display: block;
-	margin: 0 auto;
-	height: 100px;
-	width: 100px;
 }

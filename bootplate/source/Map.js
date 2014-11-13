@@ -2,20 +2,24 @@ enyo.kind({
 	name: "MapPanel",
 	components: [
 		{kind: "FittableRows", classes: "enyo-fit", components: [
-			{kind: "Map", name: "map", layer: "cloudmade", classes: "enyo-fit", bingCredentials: "AqwmKr40FdqD4Ntpo_ik3UOKXqG4uT5niPKJDhXkdNJhDqvwyscuJtWhZ72QVWAI", style: "height: 100%;", onLoaded: "setMap"},
+			{kind: "Map", name: "map", layer: "here", classes: "enyo-fit", bingCredentials: "AqwmKr40FdqD4Ntpo_ik3UOKXqG4uT5niPKJDhXkdNJhDqvwyscuJtWhZ72QVWAI", style: "height: 100%;", onLoaded: "setMap"},
 			{kind: "FittableColumns", classes: "map-content", components: [
 				{kind: "Button", classes: "map-button", ontap: "btnZoomIn", components: [
-                   {kind: "Image", src: "assets/plus.svg"}                                                                                 
+                   {kind: "Image", src: "assets/plus.png"}                                                                                 
                 ]},
 				{fit: true},
 				{kind: "Button", classes: "map-button", ontap: "btnGeoloc", components: [
-                   {kind: "Image", src: "assets/location.svg"}
+                   {kind: "Image", src: "assets/location.png"}
                 ]}
 			]},
 			{kind: "FittableColumns", classes: "map-content", style: "padding-top: 0;", components: [
 				{kind: "Button", classes: "map-button", ontap: "btnZoomOut", components: [
-                   {kind: "Image", src: "assets/minus.svg"}                                                                                 
+                   {kind: "Image", src: "assets/minus.png"}                                                                                 
                 ]}
+			]},
+			{fit:true},
+			{kind: "FittableColumns", classes: "map-here", components: [
+				{kind: "Image", src: "assets/here.png", style:"width: 30px; height: 24px;"} 
 			]},
 		]}
 	],
@@ -25,6 +29,7 @@ enyo.kind({
 	},
 	setMap: function() {
 		this.bounds = new L.LatLngBounds(new L.LatLng(43.66, 3.78), new L.LatLng(43.55, 3.97));
+		this.$.map.fitBounds(this.bounds);
 		this.$.map.setMaxBounds(this.bounds);
 
 		this.poiGroup = new L.LayerGroup();
@@ -44,7 +49,7 @@ enyo.kind({
 			"Culture": new Icon({iconUrl: "assets/Culture.png"}),
 			"Enseignement": new Icon({iconUrl: "assets/Enseignement.png"}),
 			"Loisir": new Icon({iconUrl: "assets/Loisir.png"}),
-			"Santé": new Icon({iconUrl: "assets/Santé.png"}),
+			"Santé": new Icon({iconUrl: "assets/Sante.png"}),
 			"Social": new Icon({iconUrl: "assets/Social.png"}),
 			"Sport": new Icon({iconUrl: "assets/Sport.png"})
 		};
