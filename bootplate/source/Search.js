@@ -29,11 +29,11 @@ enyo.kind({
 		var data = this.filter ? this.filtered : this.batiments;
 		var item = data[i];
 
-		this.$.name.setContent(item.name);
+		this.$.name.setContent(item.nom);
 
-		var d = item.name[0];
+		var d = item.nom[0];
 		var prev = data[i - 1];
-		var showd = d != (prev && prev.name[0]);
+		var showd = d != (prev && prev.nom[0]);
 		this.$.divider.setContent(d);
 		this.$.divider.canGenerate = showd;
 		this.$.item.applyStyle("border-top", showd ? "none" : null);
@@ -63,7 +63,7 @@ enyo.kind({
 		var re = new RegExp("^" + noAccent(inFilter), "i");
 		var r = [];
 		for (var i=0, d; d=this.batiments[i]; i++) {
-			if (d.name.match(re)) { // rajouter les catégories
+			if (d.nom.match(re)) { // rajouter les catégories
 				r.push(d);
 			}
 		}

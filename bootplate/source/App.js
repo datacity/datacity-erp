@@ -33,57 +33,123 @@ enyo.kind({
 
 		enyo.batiments = function() {
 			var genericCategories = {
-					"agglomération": "Social",
-					"associations": "Culture",
-					"auto modélisme": "Culture",
-					"baby sitting": "Social",
-					"base ball": "Sport",
-					"bases nautiques": "Loisir",
-					"beach volley": "Sport",
-					"bibliothèques et médiathèques": "Culture",
-					"boule lyonnaise": "Sport",
-					"boulodromes de pétanque": "Sport",
-					"centre équestre": "Sport",
-					"centres de loisirs associatifs": "Loisir",
-					"centres de loisirs des maisons pour tous": "Loisir",
-					"centres de recherche": "Loisir",
-					"cinémas": "Loisir",
-					"cliniques": "Santé",
-					"clubs sportifs": "Sport",
-					"clubs de loisirs": "Loisir",
-					"collèges": "Enseignement",
-					"commerce artisanat": "Social",
-					"compagnies": "Culture",
-					"conseils de quartier": "Culture",
-					"consulats": "Administration",
-					"crèches familiales municipales": "Social",
-					"crèches municipales": "Social",
-					"crèches parentales et associatives": "Social",
-					"crèches à horaires atypiques": "Social",
-					"département": "Administration",
-					"ecole d'enseignement supérieur": "Enseignement",
-					"etat": "Administration",
-					"fontaine": "Culture",
-					"galeries d'art": "Culture",
-					"hôpitaux": "Santé",
-					"logement": "Administration",
-					"marchés thématiques": "Culture",
-					"maîtrise de l'énergie": "Administration",
-					"monuments": "Culture",
-					"musées": "Culture",
-					"métiers petite enfance": "Social",
-					"parcs et jardins": "Culture",
-					"piscines": "Sport",
-					"propreté": "Social",
-					"pôles emploi": "Social",
-					//"quartiers": "Administration",
-					"relais assistantes maternelles indépendantes": "Social",
-					//"région": "Administration",
-					//"résidences-foyers": "Social",
-					//"salles": "Social",
-					//"salles d'expo": "Social",
-					"services municipaux": "Administration",
-					"sociétés d'hlm": "Social"
+				"Associations":"Association",
+				"Compagnies":"Association", 
+				"Conseils de quartier":"Association", 
+				"Service d'accueil familial associatif":"Association",
+
+				"Agglomération":"Administration",
+				"Autres multi-accueils":"Administration", 
+				"Consulats":"Administration", 
+				"Département":"Administration", 
+				"Etat":"Administration", 
+				"Mairies annexes":"Administration", 
+				"Multi-accueils municipaux":"Administration", 
+				"Postes de Police municipale":"Administration", 
+				"Région":"Administration", 
+				"Services municipaux":"Administration", 
+
+				"Adresses utiles":"Autre", 
+				"Autres contacts utiles":"Autre", 
+				"Autres lieux":"Autre", 
+				"Maîtrise de l'énergie":"Autre", 
+				"Parkings du centre ville":"Autre", 
+				"Places":"Autre", 
+				"Quartiers":"Autre", 
+				"Salles de réunions":"Autre", 
+				"salles":"Autre", 
+
+				"Commerce artisanat":"Commerce", 
+				"Grands marchés":"Commerce", 
+				"Halle":"Commerce", 
+				"Marchés de quartiers":"Commerce", 
+				"Marchés thématiques":"Commerce", 
+
+				"Missions locales des jeunes":"Emploi-Formation", 
+				"Pôles emploi":"Emploi-Formation", 
+
+				"Calandretas":"Enseignement", 
+				"Collèges":"Enseignement", 
+				"Ecoles d'enseignement supérieur":"Enseignement", 
+				"Ecoles maternelles":"Enseignement", 
+				"Ecoles privées sous contrat":"Enseignement", 
+				"Ecoles élémentaires":"Enseignement", 
+				"Enseignement primaire":"Enseignement", 
+				"Lycées":"Enseignement", 
+				"Métiers Petite Enfance":"Enseignement", 
+				"Universités":"Enseignement", 
+
+				"Auto modélisme":"Culture & Loisir", 
+				"Bases nautiques":"Culture & Loisir", 
+				"Bibliothèques et médiathèques":"Culture & Loisir", 
+				"Centres de loisirs associatifs":"Culture & Loisir", 
+				"Centres de loisirs des Maisons pour tous":"Culture & Loisir", 
+				"Centres de loisirs municipaux":"Culture & Loisir", 
+				"Chorales":"Culture & Loisir", 
+				"Cinémas":"Culture & Loisir", 
+				"Clubs de loisirs":"Culture & Loisir", 
+				"Culture":"Culture & Loisir", 
+				"Espaces jeux":"Culture & Loisir", 
+				"Galeries d'art":"Culture & Loisir", 
+				"Lieux d'accès multimédia":"Culture & Loisir", 
+				"Loisirs divers (incomplet)":"Culture & Loisir", 
+				"Maisons pour tous":"Culture & Loisir", 
+				"Monuments":"Culture & Loisir", 
+				"Musées":"Culture & Loisir", 
+				"Musées, galeries d'art":"Culture & Loisir", 
+				"Palais des congrès ":"Culture & Loisir", 
+				"Salles d'expo":"Culture & Loisir", 
+				"Salles de spectacle et concert":"Culture & Loisir", 
+
+				"Fontaines":"Parcs & jardins", 
+				"Jardin-École":"Parcs & jardins", 
+				"Jardins d'enfants":"Parcs & jardins", 
+				"Jardins partagés":"Parcs & jardins", 
+				"Parcs et jardins":"Parcs & jardins",
+
+				"Baby sitting":"Petite enfance", 
+				"Crèches parentales et associatives":"Petite enfance", 
+				"Crèches à horaires atypiques":"Petite enfance", 
+				"Crèches, accueil petite enfance":"Petite enfance", 
+				"Relais assistantes maternelles indépendantes":"Petite enfance", 
+
+				"Propreté":"Point de propreté",
+
+				"Centres de recherche":"Recherche & développement", 
+
+				"Cliniques":"Santé", 
+				"Don d'organes":"Santé", 
+				"Hôpitaux":"Santé", 
+				"Santé, solidarité":"Santé",
+
+				"Centres d'accueil":"Social", 
+				"Foyers d'hébergement":"Social", 
+				"Lieux de rencontre parents / enfants":"Social", 
+				"Logement":"Social", 
+				"Restos du Coeur":"Social", 
+				"Résidences-foyers":"Social", 
+				"Sociétés d'HLM":"Social", 
+
+				"Autres Équipement":"Sport", 
+				"Beach volley":"Sport", 
+				"Boule lyonnaise":"Sport", 
+				"Boulodromes de Pétanque":"Sport", 
+				"Clubs sportifs":"Sport", 
+				"Escalade":"Sport", 
+				"Football":"Sport", 
+				"Gymnases":"Sport", 
+				"Multisports":"Sport", 
+				"Palais des sports":"Sport", 
+				"Parcours sportifs":"Sport", 
+				"Piscines":"Sport", 
+				"Plateaux sportifs":"Sport", 
+				"Salles de sports":"Sport", 
+				"Skate board":"Sport", 
+				"Stades":"Sport", 
+				"Tennis":"Sport", 
+				"Terrains de boules":"Sport", 
+				"Terrains de foot":"Sport", 
+				"Terrains de rugby":"Sport"
 			};
 			var count = 0;
 
@@ -113,14 +179,18 @@ enyo.kind({
 
 			return {
 				add: function(batiment) {
-					var catName = batiment.categorie.trim().toLowerCase();
+					var catName = batiment.categorie.trim();
 					var newName = genericCategories[catName];
-					if (!newName || newName == "")
+					console.debug(catName + " " + genericCategormdies[catName]);
+
+					if (!newName || newName == "") {
+						console.debug("entré ici");
 						newName = "Autre";
+						}
 					
 					var category = getCategory(newName);
 
-					batiment.name = batiment.name.trim();
+					batiment.nom = batiment.nom.trim();
 					batiment.id = count;
 					batiments[count] = batiment;
 					
@@ -188,12 +258,12 @@ enyo.kind({
 
 		if (data.status == "ok") {
 			for (var i = 0, length = data.response.length; i < length; i++) {
-				data.response[i].name = data.response[i].name.trim();
+				data.response[i].nom = data.response[i].nom.trim();
 			}
 			data.response.sort(function(a, b) {
-				if (a.name < b.name)
+				if (a.nom < b.nom)
 					return -1;
-				else if (a.name > b.name)
+				else if (a.nom > b.nom)
 					return 1;
 				else
 					return 0; 
@@ -211,7 +281,8 @@ enyo.kind({
 		for (var id in all) {
 			var batiment = all[id];
 			if (batiment.latitude == 0 || batiment.longitude == 0) {
-				var adress = batiment.adress.split(" ");
+				var adress = batiment.numVoie + " " + batiment.typeVoie + " " + batiment.nomVoie + " " + batiment.codePostal + " " + batiment.ville;
+				adress = adress.split(" ");
 				for (var i in adress) {
 					if (adress[i].length == 5 && adress[i].indexOf("34", 0) != -1) {
 						adress.splice(i, 1);
@@ -227,10 +298,10 @@ enyo.kind({
 							batiment.latitude = inResponse[0].lat;
 							batiment.longitude = inResponse[0].lon;
 							localStorage.batiments = JSON.stringify(enyo.batiments.serialize());
-							// console.log("Géoloc trouvée : " + batiment.name);
+							// console.log("Géoloc trouvée : " + batiment.nom);
 							map.addBatiments([batiment]);
 						} else {
-							// console.log("ERREUR - Géoloc non trouvée : " + batiment.name);
+							// console.log("ERREUR - Géoloc non trouvée : " + batiment.nom);
 						}
 					});					
 				})(this.$.map, batiment);

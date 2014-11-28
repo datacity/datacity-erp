@@ -23,7 +23,7 @@ enyo.kind({
 		var i = inEvent.index;
 		var batiment = enyo.batiments.getBatiment(this.favorites[i]);
 
-		this.$.building.setContent(batiment.name);
+		this.$.building.setContent(batiment.nom);
 	},
 	buildingTapped: function(inSender, inEvent) {
 		var i = inEvent.index;

@@ -23,6 +23,10 @@ enyo.kind({
 						{kind: "FittableColumns", ontap: "sendMail", components: [
 							{content: "e-mail", classes: "batiment-description-label"},
 							{name: "mail", fit: true, classes: "batiment-description-content"}
+						]},
+						{kind: "FittableColumns", components: [
+							{content: "Sous-catégorie", classes: "batiment-description-label"},
+							{name: "category", fit: true, classes: "batiment-description-content"}
 						]}
 					]}
 				]}
@@ -40,39 +44,43 @@ enyo.kind({
 	},
 	updateView: function(batiment) {
 		this.batiment = batiment;
-		
+		var address = batiment.numVoie + " " + batiment.typeVoie + " " + batiment.nomVoie + " " + batiment.codePostal + " " + batiment.ville;
+
 		console.log(batiment);
-		this.$.title.setContent(this.batiment.name);
-		this.$.thumbnail.setSrc("http://maps.googleapis.com/maps/api/streetview?size=640x400&location=" + this.batiment.adress + "&sensor=true&key=AIzaSyBLceRYUnyY1YYga67bGrBV5KwwYiZGSTY");
+		this.$.title.setContent(unescape(this.batiment.nom));
+		this.$.thumbnail.setSrc("http://maps.googleapis.com/maps/api/streetview?size=640x400&location=" + address + "&sensor=true&key=AIzaSyBLceRYUnyY1YYga67bGrBV5KwwYiZGSTY");
 		this.$.favButton.setSrc(enyo.$.app.$.favorites.isFavorite(this.batiment.id) ? "assets/favon.png" : "assets/favoff.png");
-		this.$.description.setContent(this.batiment.description);
+		this.$.description.setContent(unescape(this.batiment.description.replace(/(<([^>]+)>)/ig,"").replace(/&#8217;/g, "'").replace(/&#232;/g, "è").replace(/&#224;/g, "à").replace(/&#233;/g, "é").replace(/&#160;/g, " ")));
 		if (this.batiment.description.trim().length == 0) {
 			this.$.description.hide();
 		}
-		this.$.adress.setContent(this.batiment.adress);
-		if (this.batiment.adress.trim().length == 0) {
+		this.$.adress.setContent(address);
+		if (address.trim().length == 0) {
 			this.$.adress.setContent("---");
 		}
-		this.$.phone.setContent(this.batiment.phone);
-		if (this.batiment.phone.trim().length == 0) {
+		this.$.phone.setContent(this.batiment.telephone);
+		if (this.batiment.telephone.trim().length == 0) {
 			this.$.phone.setContent("---");
 		}
-		this.$.website.setContent(this.batiment.website);
-		if (this.batiment.website.trim().length == 0) {
+		this.$.website.setContent(this.batiment.siteWeb);
+		if (this.batiment.siteWeb.trim().length == 0) {
 			this.$.website.setContent("---");
 		}
 		this.$.mail.setContent(this.batiment.email);
 		if (this.batiment.email.trim().length == 0) {
 			this.$.mail.setContent("---");
 		}
-
+		this.$.category.setContent(this.batiment.categorie);
+		if (this.batiment.categorie.trim().length == 0) {
+			this.$.category.setContent("---");
+		}
 
 	},
 	callNumber: function() {
-		window.open('tel://' + this.batiment.phone);
+		window.open('tel://' + this.batiment.telephone);
 	},
 	openBrowser: function() {
-		window.open('http://' + this.batiment.website);
+		window.open('http://' + this.batiment.siteWeb);
 	},
 	sendMail: function() {
 		window.open('mailto://' + this.batiment.email);

@@ -44,11 +44,17 @@ enyo.kind({
 		});
 		this.icons = {
 			"default": new Icon({iconUrl: "assets/default.png"}),
+			"Association": new Icon({iconUrl: "assets/Association.png"}),
 			"Administration": new Icon({iconUrl: "assets/Administration.png"}),
 			"Autre": new Icon({iconUrl: "assets/Autre.png"}),
-			"Culture": new Icon({iconUrl: "assets/Culture.png"}),
+			"Commerce": new Icon({iconUrl: "assets/Commerce.png"}),
+			"Emploi-Formation": new Icon({iconUrl: "assets/Emploi-Formation.png"}),
 			"Enseignement": new Icon({iconUrl: "assets/Enseignement.png"}),
-			"Loisir": new Icon({iconUrl: "assets/Loisir.png"}),
+			"Culture & Loisir": new Icon({iconUrl: "assets/Culture & Loisir.png"}),
+			"Parcs & jardins": new Icon({iconUrl: "assets/Parcs & Jardins.png"}),
+			"Petite enfance": new Icon({iconUrl: "assets/Petite enfance.png"}),
+			"Point de propreté": new Icon({iconUrl: "assets/Point de propreté.png"}),
+			"Recherche & développement": new Icon({iconUrl: "assets/Recherche & développement.png"}),
 			"Santé": new Icon({iconUrl: "assets/Sante.png"}),
 			"Social": new Icon({iconUrl: "assets/Social.png"}),
 			"Sport": new Icon({iconUrl: "assets/Sport.png"})
@@ -89,7 +95,7 @@ enyo.kind({
 		for (var i in batiments) {
 			if (batiments[i].latitude > 0 && batiments[i].longitude > 0) {
 				var marker = new L.Marker(new L.LatLng(batiments[i].latitude, batiments[i].longitude), {
-					icon: enyo.batiments.getGenericCategory(batiments[i].categorie.trim().toLowerCase()) in this.icons ? this.icons[enyo.batiments.getGenericCategory(batiments[i].categorie.trim().toLowerCase())] : this.icons["Autre"]
+					icon: enyo.batiments.getGenericCategory(batiments[i].categorie.trim()) in this.icons ? this.icons[enyo.batiments.getGenericCategory(batiments[i].categorie.trim())] : this.icons["Autre"]
 				});
 				this.poiGroup.addLayer(marker);
 				(function(batiment, panelName) {

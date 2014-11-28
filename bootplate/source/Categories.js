@@ -78,7 +78,7 @@ enyo.kind({
 		var i = inEvent.index;
 		var item = this.batiments[i];
 
-		this.$.panelbuildingcontent.setContent(item.name);
+		this.$.panelbuildingcontent.setContent(item.nom);
 	},
 	buttonBackPressed: function(inSender, inEvent) {
 		this.$.categoriesPanels.previous();
