@@ -181,12 +181,10 @@ enyo.kind({
 				add: function(batiment) {
 					var catName = batiment.categorie.trim();
 					var newName = genericCategories[catName];
-					console.debug(catName + " " + genericCategormdies[catName]);
 
 					if (!newName || newName == "") {
-						console.debug("entré ici");
 						newName = "Autre";
-						}
+					}
 					
 					var category = getCategory(newName);
 
